@@ -1,11 +1,15 @@
-// const router = require('express').Router();
-// const User = require('./user.model');
-// const usersService = require('./user.service');
+const Router = require('@koa/router');
 
-// router.route('/').get(async (req, res) => {
-//   const users = await usersService.getAll();
-//   // map user fields to exclude secret fields like "password"
-//   res.json(users.map(User.toResponse));
-// });
+const router = new Router({
+  prefix: '/user'
+});
 
-// module.exports = router;
+router.get('/', ctx => {
+  ctx.body = "I'm a user";
+});
+
+router.post('/', ctx => {
+  ctx.body = {message: "I can create something"};
+});
+
+module.exports = router;

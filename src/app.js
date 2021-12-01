@@ -1,24 +1,16 @@
-// const express = require('express');
-// const swaggerUI = require('swagger-ui-express');
-// const path = require('path');
-// const YAML = require('yamljs');
-// const userRouter = require('./resources/users/user.router');
+const Koa = require('koa');
+const bodyParser = require('koa-bodyparser');
 
-// const app = express();
-// const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
-
-// app.use(express.json());
-
-// app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-
-// app.use('/', (req, res, next) => {
-//   if (req.originalUrl === '/') {
-//     res.send('Service is running!');
-//     return;
-//   }
-//   next();
+const UserRoutes = require('./resources/users/user.router');
+ 
+const app = new Koa();
+app.use(bodyParser());
+ 
+// app.use(async ctx => {
+//   ctx.body = ctx.request.body;
 // });
 
-// app.use('/users', userRouter);
+app.use(UserRoutes.routes())
+  .use(UserRoutes.allowedMethods());
 
-// module.exports = app;
+module.exports = app;
