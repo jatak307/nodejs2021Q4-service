@@ -13,6 +13,7 @@ const update = async (id, body) => {
     login: body.login || oldUser.login,
     password: body.password || oldUser.password
   };
+  // const updatedUs = await usersRepo.updateUser(id, userData);
   return await usersRepo.updateUser(id, userData);
 };
 const deleteUser = async (id) => await usersRepo.removeUser(id);

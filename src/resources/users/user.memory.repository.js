@@ -16,6 +16,7 @@ const updateUser = (id, body) => {
   let updatedUser = usersData.get(id);
   updatedUser = { id, ...body };
   usersData.set(id, updatedUser);
+  return updatedUser;
 };
 
 const removeUser = (id) => usersData.delete(id);

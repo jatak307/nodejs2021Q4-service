@@ -24,32 +24,20 @@ router
     const inputData =  ctx.request.body;
     const user = await create(inputData);
     ctx.status = 201;
-    ctx.body = user;
+    const { id, name, login } = user;
+    ctx.body = { id, name, login };
   })
   .put('/:id', async (ctx) => {
     const userId = ctx.params.id;
     const inputData =  ctx.request.body;
-    const updateUser = await update(userId, inputData);
+    const updatedUser = await update(userId, inputData);
+    ctx.body = updatedUser;
     ctx.status = 200;
-    ctx.body = updateUser;
   })
   .delete('/:id', async (ctx) => {
     const userId = ctx.params.id;
     await deleteUser(userId);
     ctx.status = 204;
   });
-
-// .post('/product', koaBody, async (ctx, next) => {
-//   ctx.status = 201;
-//   ctx.body = await product.create(ctx.request.body)
-// })
-// .put('/product/:id', koaBody, async (ctx, next) => {
-//   ctx.status = 204;
-//   await product.update(ctx.params.id, ctx.request.body);
-// })
-// .delete('/product/:id', async (ctx, next) => {
-//   ctx.status = 204;
-//   await product.delete(ctx.params.id);
-// });
 
 module.exports = router;
