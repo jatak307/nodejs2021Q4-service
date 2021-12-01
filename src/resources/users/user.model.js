@@ -17,10 +17,6 @@ class User {
     const { id, name, login } = user;
     return { id, name, login };
   }
-
-  get() {
-    return this;
-  }
 }
 
 module.exports = User;
