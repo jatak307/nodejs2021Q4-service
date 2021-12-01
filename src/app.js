@@ -5,10 +5,11 @@ const UserRoutes = require('./resources/users/user.router');
  
 const app = new Koa();
 app.use(bodyParser());
- 
+
 // app.use(async ctx => {
 //   ctx.body = ctx.request.body;
 // });
+// console.log(UserRoutes);
 
 app.use(UserRoutes.routes())
   .use(UserRoutes.allowedMethods());
