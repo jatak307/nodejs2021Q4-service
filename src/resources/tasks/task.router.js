@@ -1,6 +1,6 @@
 const Router = require('@koa/router');
 
-const { getAllTasks, getTaskById, createTask } = require('./task.service');
+const { getAllTasks, getTaskById, createTask, updateTask, deleteTask } = require('./task.service');
 
 const router = new Router({
   prefix: '/tasks'
@@ -26,6 +26,18 @@ router
     ctx.status = 201;
     const { id, title, columns } = task;
     ctx.body = { id, title, columns };
+  })
+  .put('/:id', async (ctx) => {
+    const taskdId = ctx.params.id;
+    const inputData =  ctx.request.body;
+    const updatedTask = await updateTask(taskdId, inputData);
+    ctx.body = updatedTask;
+    ctx.status = 200;
+  })
+  .delete('/:id', async (ctx) => {
+    const taskdId = ctx.params.id;
+    await deleteTask(taskdId);
+    ctx.status = 204;
   });
 
 module.exports = router;

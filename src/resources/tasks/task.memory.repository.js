@@ -12,4 +12,13 @@ const createTask = (obj) => {
   return task;
 };
 
-module.exports = { getAllTasks, getTaskById, createTask };
+const updateTask = (id, body) => {
+  let updatedTask = tasksData.get(id);
+  updatedTask = { id, ...body };
+  tasksData.set(id, updatedTask);
+  return updatedTask;
+};
+
+const deleteTask = (id) => tasksData.delete(id);
+
+module.exports = { getAllTasks, getTaskById, createTask, updateTask, deleteTask };
