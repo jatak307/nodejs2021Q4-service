@@ -23,9 +23,9 @@ router
   .post('/', async (ctx) => {
     const inputData =  ctx.request.body;
     const task = await createTask(inputData);
+    const boardId = ctx.params.id;
     ctx.status = 201;
-    const { id, title, columns } = task;
-    ctx.body = { id, title, columns };
+    ctx.body = { ...task, boardId };
   })
   .put('/:id', async (ctx) => {
     const taskdId = ctx.params.id;
