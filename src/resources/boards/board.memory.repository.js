@@ -19,4 +19,6 @@ const updateBoard = (id, body) => {
   return updatedBoard;
 };
 
-module.exports = { getBoards, getBoard, createBoard, updateBoard };
+const deleteBoard = (id) => boardsData.delete(id);
+
+module.exports = { getBoards, getBoard, createBoard, updateBoard, deleteBoard };

@@ -12,5 +12,6 @@ const updateBoard = async (id, body) => {
   };
   return await boardsRepo.updateBoard(id, boardData);
 };
+const deleteBoard = async (id) => await boardsRepo.deleteBoard(id);
 
-module.exports = { getAllBoards, getBoardById, createBoard, updateBoard };
+module.exports = { getAllBoards, getBoardById, createBoard, updateBoard, deleteBoard };
