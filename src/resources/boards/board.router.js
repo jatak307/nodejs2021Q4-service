@@ -1,5 +1,5 @@
 const Router = require('@koa/router');
-const TaskRoutes = require('../tasks/tasks.router');
+const TaskRoutes = require('../tasks/task.router');
 
 const { getAllBoards, getBoardById, createBoard, updateBoard, deleteBoard } = require('./board.service');
 
