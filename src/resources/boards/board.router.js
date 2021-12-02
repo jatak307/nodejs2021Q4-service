@@ -1,4 +1,5 @@
 const Router = require('@koa/router');
+const TaskRoutes = require('../tasks/tasks.router');
 
 const { getAllBoards, getBoardById, createBoard, updateBoard, deleteBoard } = require('./board.service');
 
@@ -39,5 +40,7 @@ router
     await deleteBoard(boardId);
     ctx.status = 204;
   });
+
+router.use('/:id', TaskRoutes.routes(), TaskRoutes.allowedMethods());
 
 module.exports = router;
