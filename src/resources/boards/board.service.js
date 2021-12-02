@@ -1,4 +1,3 @@
-/* eslint-disable no-return-await */
 const boardsRepo = require('./board.memory.repository');
 const { getAllTasks, deleteTask } = require('../tasks/task.service');
 

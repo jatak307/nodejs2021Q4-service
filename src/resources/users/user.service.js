@@ -1,4 +1,3 @@
-/* eslint-disable no-return-await */
 const usersRepo = require('./user.memory.repository');
 const { getAllTasks } = require('../tasks/task.service');
 

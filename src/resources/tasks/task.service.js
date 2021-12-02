@@ -1,4 +1,3 @@
-/* eslint-disable no-return-await */
 const tasksRepo = require('./task.memory.repository');
 
 const getAllTasks = async () => await tasksRepo.getAllTasks();
