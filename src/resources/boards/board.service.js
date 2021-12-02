@@ -1,5 +1,6 @@
 /* eslint-disable no-return-await */
 const boardsRepo = require('./board.memory.repository');
+const { getAllTasks, deleteTask } = require('../tasks/task.service');
 
 const getAllBoards = async () => await boardsRepo.getBoards();
 const getBoardById = async (id) => await boardsRepo.getBoard(id);
@@ -12,6 +13,12 @@ const updateBoard = async (id, body) => {
   };
   return await boardsRepo.updateBoard(id, boardData);
 };
-const deleteBoard = async (id) => await boardsRepo.deleteBoard(id);
+const deleteBoard = async (id) => {
+  const tasks = await getAllTasks();
+  tasks.forEach((task) => {
+    if (task.boardId === id) deleteTask(task.id);
+  });
+  return await boardsRepo.deleteBoard(id);
+};
 
 module.exports = { getAllBoards, getBoardById, createBoard, updateBoard, deleteBoard };

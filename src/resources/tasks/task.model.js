@@ -23,6 +23,10 @@ class Task {
     const { id, title, order, description } = task;
     return { id, title, order, description };
   }
+
+  setUser(newUserID = null) {
+    this.userId = newUserID;
+  }
 }
 
 module.exports = Task;

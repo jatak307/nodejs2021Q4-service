@@ -1,5 +1,6 @@
 /* eslint-disable no-return-await */
 const usersRepo = require('./user.memory.repository');
+const { getAllTasks } = require('../tasks/task.service');
 
 const getAll = async () => await usersRepo.getUsers();
 const getById = async (id) => await usersRepo.getUser(id);
@@ -13,6 +14,14 @@ const update = async (id, body) => {
   };
   return await usersRepo.updateUser(id, userData);
 };
-const deleteUser = async (id) => await usersRepo.removeUser(id);
+const deleteUser = async (id) => {
+  const tasks = await getAllTasks();
+  tasks.forEach((task) => {
+    if (task.userId === id) {
+      task.setUser();
+    }
+  });
+  await usersRepo.removeUser(id);
+};
 
 module.exports = { getAll, getById, create, update, deleteUser };
