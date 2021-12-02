@@ -12,4 +12,11 @@ const createBoard = (obj) => {
   return board;
 };
 
-module.exports = { getBoards, getBoard, createBoard };
+const updateBoard = (id, body) => {
+  let updatedBoard = boardsData.get(id);
+  updatedBoard = { id, ...body };
+  boardsData.set(id, updatedBoard);
+  return updatedBoard;
+};
+
+module.exports = { getBoards, getBoard, createBoard, updateBoard };

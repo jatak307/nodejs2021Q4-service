@@ -1,6 +1,6 @@
 const Router = require('@koa/router');
 
-const { getAllBoards, getBoardById, createBoard } = require('./board.service');
+const { getAllBoards, getBoardById, createBoard, updateBoard } = require('./board.service');
 
 const router = new Router({
   prefix: '/boards'
@@ -26,6 +26,13 @@ router
     ctx.status = 201;
     const { id, title, columns } = board;
     ctx.body = { id, title, columns };
+  })
+  .put('/:id', async (ctx) => {
+    const boardId = ctx.params.id;
+    const inputData =  ctx.request.body;
+    const updatedBoard = await updateBoard(boardId, inputData);
+    ctx.body = updatedBoard;
+    ctx.status = 200;
   })
 
 module.exports = router;
