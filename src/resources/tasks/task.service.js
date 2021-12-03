@@ -1,8 +1,20 @@
 const tasksRepo = require('./task.memory.repository');
 
-const getAllTasks = async () => await tasksRepo.getAllTasks();
-const getTaskById = async (id) => await tasksRepo.getTaskById(id);
-const createTask = async (data) => await tasksRepo.createTask(data);
+const getAllTasks = async () => {
+  const allTasks = await tasksRepo.getAllTasks();
+  return allTasks;
+};
+
+const getTaskById = async (id) => {
+  const task = await tasksRepo.getTaskById(id);
+  return task;
+};
+
+const createTask = async (data) => {
+  const createdTask = await tasksRepo.createTask(data);
+  return createdTask;
+};
+
 const updateTask = async (id, body) => {
   const oldTask = await getTaskById(id);
   const taskData = {
@@ -13,9 +25,12 @@ const updateTask = async (id, body) => {
     boardId: body.boardId || oldTask.boardId,
     columnId: body.columnId || oldTask.columnId
   };
-
-  return await tasksRepo.updateTask(id, taskData);
+  const updatedTask = await tasksRepo.updateTask(id, taskData);
+  return updatedTask;
 };
-const deleteTask = async (id) => await tasksRepo.deleteTask(id);
+
+const deleteTask = async (id) => {
+  await tasksRepo.deleteTask(id);
+}
 
 module.exports = { getAllTasks, getTaskById, createTask, updateTask, deleteTask };
