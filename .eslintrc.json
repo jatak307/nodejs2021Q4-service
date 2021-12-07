@@ -6,12 +6,14 @@
     "jest": true,
     "node": true
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 2021,
-    "ecmaFeatures": {
-      "impliedStrict": true
-    }
+    "project": "./tsconfig.json"
+    // "sourceType": "module",
+    // "ecmaVersion": 2021,
+    // "ecmaFeatures": {
+    //   "impliedStrict": true
+    // }
   },
   "settings": {
     "noInlineConfig": true
