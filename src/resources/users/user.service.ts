@@ -36,9 +36,7 @@ async function deleteUser(id: string): Promise<void> {
   const tasks: Task[] = await getAllTasks();
   tasks.forEach((task: Task) => {
     if (task.userId === id) {
-      // task.setUser();
-      // eslint-disable-next-line no-param-reassign
-      task.userId = null;
+      task.setUser();
     }
   });
   await removeUser(id);

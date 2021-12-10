@@ -38,9 +38,9 @@ class Task {
     return { id, title, order, description };
   }
 
-  // setUser(newUserID = null) {
-  //   this.userId = newUserID;
-  // }
+  setUser(newUserID = null) {
+    if (newUserID) this.userId = newUserID;
+  }
 }
 
 export { Task };

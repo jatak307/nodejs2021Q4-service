@@ -18,8 +18,13 @@ function createNewTask(obj: CreateTask): Task {
 }
 
 function updateTaskById(id: string, body: UpdateTask): Task {
-  let updatedTask: Task | undefined = tasksData.get(id);
-  updatedTask = { id, ...body };
+  const updatedTask: Task | undefined = tasksData.get(id);
+  if (updatedTask === undefined) throw new Error("Task not found");
+  
+  updatedTask.description = body.description;
+  updatedTask.order = body.order;
+  updatedTask.title = body.title;
+
   tasksData.set(id, updatedTask);
   return updatedTask;
 }
