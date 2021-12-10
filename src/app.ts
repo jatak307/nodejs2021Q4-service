@@ -5,7 +5,7 @@ import { UserRoutes } from './resources/users/user.router';
 import { BoardsRoutes } from './resources/boards/board.router';
 import { errorHundler } from './common/error';
 
-const app = new Koa();
+const app: Koa<Koa.DefaultState, Koa.DefaultContext> = new Koa();
 app.use(bodyParser());
 
 app.use(errorHundler);

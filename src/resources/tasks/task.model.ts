@@ -39,7 +39,7 @@ class Task {
   }
 
   setUser(newUserID = null) {
-    if (newUserID) this.userId = newUserID;
+    this.userId = newUserID;
   }
 }
 

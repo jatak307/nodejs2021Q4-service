@@ -20,10 +20,13 @@ function createNewTask(obj: CreateTask): Task {
 function updateTaskById(id: string, body: UpdateTask): Task {
   const updatedTask: Task | undefined = tasksData.get(id);
   if (updatedTask === undefined) throw new Error("Task not found");
-  
+
   updatedTask.description = body.description;
   updatedTask.order = body.order;
   updatedTask.title = body.title;
+  updatedTask.boardId = body.boardId;
+  updatedTask.userId = body.userId;
+  updatedTask.columnId = body.columnId;
 
   tasksData.set(id, updatedTask);
   return updatedTask;
