@@ -21,12 +21,27 @@
   "ignorePatterns": ["*.config.js", "node_modules/"],
   "settings": {
     "noInlineConfig": true,
+    "node": {
+      "tryExtensions": [".js", ".ts", ".d.ts"],
+      "moduleDirectory": ["node_modules", "src/"]
+    },
     "import/resolver": {
       "node": {
-          "extensions": [".js", ".jsx", ".ts", ".tsx", ".json", ".node"],
-          "moduleDirectory": ["node_modules", "src/"]
+        "extensions": [".js", ".ts", ".d.ts"],
+        "moduleDirectory": ["node_modules", "src/"],
+        "typescript": {}
+      },
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "."
       }
     }
+    // "import/resolver": {
+    //   "node": {
+    //       "extensions": [".js", ".jsx", ".ts", ".tsx", ".json", ".node"],
+    //       "moduleDirectory": ["node_modules", "src/"]
+    //   }
+    // }
   },
   "extends": [
     "eslint:recommended",
