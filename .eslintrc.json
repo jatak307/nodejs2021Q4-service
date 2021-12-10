@@ -42,6 +42,7 @@
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
     "no-console": "warn",
+    "@typescript-eslint/no-explicit-any": 2,
     "max-len": ["warn", { "code": 120 }],
     "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
     "indent": ["warn", 2, {
