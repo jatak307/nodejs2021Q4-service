@@ -3,23 +3,29 @@ import { CreateTask, UpdateTask } from './task.models';
 
 const tasksData: Map<string, Task> = new Map();
 
-const getTasksArray = () => [...tasksData.values()];
+function getTasksArray(): Task[] {
+  return [...tasksData.values()];
+}
 
-const getTask = (id: string) => tasksData.get(id);
+function getTask(id: string): Task | undefined {
+  return tasksData.get(id);
+}
 
-const createNewTask = (obj: CreateTask) => {
-  const task = new Task(obj);
+function createNewTask(obj: CreateTask): Task {
+  const task: Task = new Task(obj);
   tasksData.set(task.id, task);
   return task;
-};
+}
 
-const updateTaskById = (id: string, body: UpdateTask) => {
-  let updatedTask = tasksData.get(id);
+function updateTaskById(id: string, body: UpdateTask): Task {
+  let updatedTask: Task | undefined = tasksData.get(id);
   updatedTask = { id, ...body };
   tasksData.set(id, updatedTask);
   return updatedTask;
-};
+}
 
-const deleteTaskById = (id: string) => tasksData.delete(id);
+function deleteTaskById(id: string): void {
+  tasksData.delete(id);
+}
 
 export { getTasksArray, getTask, createNewTask, updateTaskById, deleteTaskById };
