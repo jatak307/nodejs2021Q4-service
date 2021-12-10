@@ -1,6 +1,12 @@
-const { v4: uuidV4 } = require('uuid');
+import { v4 as uuidV4 } from 'uuid';
 
 class Board {
+  id: string;
+
+  title: string;
+
+  columns: never[];
+
   constructor({
     id = uuidV4(),
     title = 'BOARD',
@@ -11,10 +17,10 @@ class Board {
     this.columns = columns;
   }
 
-  static toResponse(board) {
+  static toResponse(board: Board) {
     const { id, title, columns } = board;
     return { id, title, columns };
   }
 }
 
-module.exports = Board;
+export { Board };

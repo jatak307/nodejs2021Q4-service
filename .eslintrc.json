@@ -7,28 +7,54 @@
     "node": true
   },
   "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "parserOptions": {
-    "project": "./tsconfig.json"
-    // "sourceType": "module",
-    // "ecmaVersion": 2021,
-    // "ecmaFeatures": {
-    //   "impliedStrict": true
-    // }
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true
+    }
   },
+  "ignorePatterns": ["*.config.js", "node_modules/"],
   "settings": {
-    "noInlineConfig": true
+    "noInlineConfig": true,
+    "import/resolver": {
+      "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx", ".json", ".node"],
+          "moduleDirectory": ["node_modules", "src/"]
+      }
+    }
   },
   "extends": [
     "eslint:recommended",
     "plugin:node/recommended",
     "airbnb-base",
-    "prettier"
+    "prettier",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "import/extensions": "off",
     "linebreak-style": "off",
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
-    "import/prefer-default-export": "off"
+    "no-console": "warn",
+    "max-len": ["warn", { "code": 120 }],
+    "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
+    "indent": ["warn", 2, {
+      "SwitchCase": 1
+    }],
+    "@typescript-eslint/indent": ["warn", 2, {
+      "SwitchCase": 1
+    }],
+    "import/prefer-default-export": "off",
+    "node/no-missing-import": ["error", {
+      "allowModules": [],
+      "resolvePaths": ["/path/to/a/modules/directory"],
+      "tryExtensions": [".js", ".json", ".node", ".ts"]
+  }]
   }
 }

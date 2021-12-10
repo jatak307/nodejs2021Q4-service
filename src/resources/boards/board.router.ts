@@ -1,13 +1,14 @@
-const Router = require('@koa/router');
-const TaskRoutes = require('../tasks/task.router');
+import Router from '@koa/router';
 
-const { getAllBoards, getBoardById, createBoard, updateBoard, deleteBoard } = require('./board.service');
+// const TaskRoutes = require('../tasks/task.router');
 
-const router = new Router({
+import { getAllBoards, getBoardById, createBoard, updateBoard, deleteBoard } from './board.service';
+
+const BoardsRoutes = new Router({
   prefix: '/boards'
 });
 
-router
+BoardsRoutes
   .get('/', async (ctx) => {
     ctx.body= await getAllBoards();
   })
@@ -41,6 +42,6 @@ router
     ctx.status = 204;
   });
 
-router.use('/:id', TaskRoutes.routes(), TaskRoutes.allowedMethods());
+// BoardsRoutes.use('/:id', TaskRoutes.routes(), TaskRoutes.allowedMethods());
 
-module.exports = router;
+export { BoardsRoutes };

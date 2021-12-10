@@ -1,12 +1,12 @@
-const Router = require('@koa/router');
+import Router from '@koa/router';
 
-const { getAllTasks, getTaskById, createTask, updateTask, deleteTask } = require('./task.service');
+import { getAllTasks, getTaskById, createTask, updateTask, deleteTask } from './task.service';
 
-const router = new Router({
+const TaskRoutes = new Router({
   prefix: '/tasks'
 });
 
-router
+TaskRoutes
   .get('/', async (ctx) => {
     ctx.body= await getAllTasks();
   })
@@ -40,4 +40,4 @@ router
     ctx.status = 204;
   });
 
-module.exports = router;
+export { TaskRoutes };

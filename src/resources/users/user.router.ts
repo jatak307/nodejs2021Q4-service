@@ -1,14 +1,14 @@
-const Router = require('@koa/router');
+import Router from '@koa/router';
 
-const { getAll, getById, create, update, deleteUser } = require('./user.service');
+import { getAll, getById, create, update, deleteUser } from './user.service';
 
-const router = new Router({
+const UserRoutes = new Router({
   prefix: '/users'
 });
 
-router
+UserRoutes
   .get('/', async (ctx) => {
-    ctx.body= await getAll();
+    ctx.body = await getAll();
   })
   .get('/:id', async (ctx) => {
     const userId = ctx.params.id;
@@ -21,7 +21,7 @@ router
     }
   })
   .post('/', async (ctx) => {
-    const inputData =  ctx.request.body;
+    const inputData = ctx.request.body;
     const user = await create(inputData);
     ctx.status = 201;
     const { id, name, login } = user;
@@ -29,7 +29,7 @@ router
   })
   .put('/:id', async (ctx) => {
     const userId = ctx.params.id;
-    const inputData =  ctx.request.body;
+    const inputData = ctx.request.body;
     const updatedUser = await update(userId, inputData);
     ctx.body = updatedUser;
     ctx.status = 200;
@@ -40,4 +40,4 @@ router
     ctx.status = 204;
   });
 
-module.exports = router;
+export { UserRoutes };
