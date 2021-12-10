@@ -1,6 +1,6 @@
 import Router from '@koa/router';
 
-// const TaskRoutes = require('../tasks/task.router');
+import { TaskRoutes } from '../tasks/task.router';
 
 import { getAllBoards, getBoardById, createBoard, updateBoard, deleteBoard } from './board.service';
 
@@ -42,6 +42,6 @@ BoardsRoutes
     ctx.status = 204;
   });
 
-// BoardsRoutes.use('/:id', TaskRoutes.routes(), TaskRoutes.allowedMethods());
+BoardsRoutes.use('/:id', TaskRoutes.routes(), TaskRoutes.allowedMethods());
 
 export { BoardsRoutes };
