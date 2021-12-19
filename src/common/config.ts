@@ -21,4 +21,7 @@ const config: Config = {
   AUTH_MODE: process.env.AUTH_MODE === 'true'
 };
 
-export { config };
+export { 
+  Config,
+  config 
+};

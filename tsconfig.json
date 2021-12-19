@@ -1,4 +1,7 @@
 {
+  "include": [
+    "src/**/*.ts"
+  ],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
@@ -69,25 +72,13 @@
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   },
   "typedocOptions": {
-      "entryPoints": [
-        "src/server.ts", 
-        "src/app.ts", 
-        "src/resources/users/user.service.ts", 
-        "src/resources/users/user.router.ts", 
-        "src/resources/users/user.model.ts", 
-        "src/resources/users/user.models.ts",
-        "src/resources/users/user.memory.repository.ts", 
-        "src/resources/boards/board.service.ts", 
-        "src/resources/boards/board.model.ts", 
-        "src/resources/boards/board.models.ts", 
-        "src/resources/boards/board.router.ts", 
-        "src/resources/boards/board.memory.repository.ts", 
-        "src/resources/tasks/task.service.ts", 
-        "src/resources/tasks/task.model.ts", 
-        "src/resources/tasks/task.models.ts", 
-        "src/resources/tasks/task.router.ts", 
-        "src/resources/tasks/task.memory.repository.ts"
-      ],
-      "out": "docs"
+    "out": "docs",
+    "includeVersion": true,
+    "name": "TypeDoc Documentation",
+    "excludeExternals": true,
+    "entryPointStrategy": "expand",
+    "entryPoints": [
+      "src"
+    ]
   }
 }

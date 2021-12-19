@@ -1,13 +1,15 @@
+import { BaseContext } from 'koa';
+
 type ErrorHundler = (
-  ctx: {
-    status: number;
-    body: {
-      message: string;
-    };
-  }, 
-  next: () => unknown
+  ctx: BaseContext, 
+  next: () => Promise<unknown>
 ) => Promise<void>;
 
+/**
+ * This function is a middleware for catching errors.
+ * @param ctx Context object that encapsulates an incoming http message and the corresponding response to that message
+ * @param next Promise
+ */
 const errorHundler: ErrorHundler = async (ctx, next) => {
   try {
     await next();
@@ -21,5 +23,6 @@ const errorHundler: ErrorHundler = async (ctx, next) => {
 };
 
 export {
+  ErrorHundler,
   errorHundler
 }
