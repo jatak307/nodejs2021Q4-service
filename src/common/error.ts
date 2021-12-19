@@ -1,4 +1,14 @@
-const errorHundler = async (ctx: { status: number; body: { message: string; }; }, next: () => unknown) => {
+type ErrorHundler = (
+  ctx: {
+    status: number;
+    body: {
+      message: string;
+    };
+  }, 
+  next: () => unknown
+) => Promise<void>;
+
+const errorHundler: ErrorHundler = async (ctx, next) => {
   try {
     await next();
   } catch (err) {

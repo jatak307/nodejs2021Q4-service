@@ -1,5 +1,8 @@
 import { v4 as uuidV4 } from 'uuid';
 
+/**
+ * This class sets the state and behavior for the task object
+ */
 class Task {
   id: string;
 
@@ -33,12 +36,11 @@ class Task {
     this.columnId = columnId;
   }
 
-  static toResponse(task: Task) {
-    const { id, title, order, description } = task;
-    return { id, title, order, description };
-  }
-
-  setUser(newUserID = null) {
+  /**
+ * This method overwrites the userId for the class instance
+ * @param newUserID id of the user to whom the instance of the class should be assigned. Default null
+ */
+  public setUser(newUserID = null): void {
     this.userId = newUserID;
   }
 }

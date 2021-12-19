@@ -8,21 +8,42 @@ import {
 import { Task } from './task.model';
 import { CreateTask, UpdateTask } from './task.models';
 
+
+/**
+ * Waits to receive an array of tasks from the database
+ * @returns a promise of an array of tasks
+ */
 async function getAllTasks(): Promise<Task[]> {
   const allTasks: Task[] = await getTasksArray();
   return allTasks;
 }
 
+/**
+ * Waits to get the task by ID 
+ * @param id task ID
+ * @returns Task or undefined Promise
+ */
 async function getTaskById(id: string): Promise<Task | undefined> {
   const task: Task | undefined = await getTask(id);
   return task;
 }
 
+/**
+ * Waits to create the task
+ * @param body data for create task
+ * @returns New Task Promise
+ */
 async function createTask(data: CreateTask): Promise<Task> {
   const createdTask: Task = await createNewTask(data);
   return createdTask;
 }
 
+/**
+ * Waits to update the task by ID 
+ * @param id task ID
+ * @param body new data for this task
+ * @returns Updated Task Promise
+ */
 async function updateTask(id: string, body: UpdateTask): Promise<Task> {
   const oldTask: Task | undefined = await getTaskById(id);
   if (oldTask === undefined) throw new Error("Board not found");
@@ -38,6 +59,10 @@ async function updateTask(id: string, body: UpdateTask): Promise<Task> {
   return updatedTask;
 }
 
+/**
+ * Waits to delete the task by ID
+ * @param id task ID
+ */
 async function deleteTask(id: string): Promise<void> {
   await deleteTaskById(id);
 }

@@ -1,5 +1,8 @@
 import { v4 as uuidV4 } from 'uuid';
 
+/**
+ * This class sets the state for the user object
+ */
 class User {
   id: string;
 
@@ -19,11 +22,6 @@ class User {
     this.name = name;
     this.login = login;
     this.password = password;
-  }
-
-  static toResponse(user: User) {
-    const { id, name, login } = user;
-    return { id, name, login };
   }
 }
 

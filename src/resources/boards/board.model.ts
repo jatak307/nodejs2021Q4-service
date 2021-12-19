@@ -1,5 +1,8 @@
 import { v4 as uuidV4 } from 'uuid';
 
+/**
+ * This class sets the state for the board object
+ */
 class Board {
   id: string;
 
@@ -15,11 +18,6 @@ class Board {
     this.id = id;
     this.title = title;
     this.columns = columns;
-  }
-
-  static toResponse(board: Board) {
-    const { id, title, columns } = board;
-    return { id, title, columns };
   }
 }
 
