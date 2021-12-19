@@ -5,6 +5,10 @@ import { User } from './user.model';
 import { getAllTasks } from '../tasks/task.service';
 import { Task } from '../tasks/task.model';
 
+/**
+ * Waits to receive an array of users from the database
+ * @returns a promise of an array of users
+ */
 async function getAll(): Promise<User[]> {
   const allUsers: User[] = await getUsers();
   return allUsers;
