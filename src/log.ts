@@ -6,6 +6,9 @@ const logger = winston.createLogger({
       filename: './logs/filelog-all.log',
       format: winston.format.combine(winston.format.timestamp(), winston.format.json())
     })
+  ],
+  exceptionHandlers: [
+    new winston.transports.File({ filename: './logs/exceptions.log' })
   ]
 });
 

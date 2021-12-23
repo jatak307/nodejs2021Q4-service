@@ -4,6 +4,7 @@ import bodyParser from "koa-bodyparser";
 import { UserRoutes } from './resources/users/user.router';
 import { BoardsRoutes } from './resources/boards/board.router';
 import { errorHundler } from './common/error';
+import { logger } from './log';
 
 /**
  * Instantiate koa
@@ -19,5 +20,9 @@ app.use(UserRoutes.routes())
 
 app.use(BoardsRoutes.routes())
   .use(BoardsRoutes.allowedMethods());
+
+process.on('uncaughtException', errorHundler);
+
+throw Error('Oops!');
 
 export { app };
