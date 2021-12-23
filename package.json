@@ -81,6 +81,7 @@
     "supertest": "6.1.6",
     "ts-node": "^10.4.0",
     "typedoc": "^0.22.10",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "winston": "^3.3.3"
   }
 }
