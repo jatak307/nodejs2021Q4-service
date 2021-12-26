@@ -13,7 +13,7 @@ const logger = winston.createLogger({
   transports: [
     new winston.transports.File({
       level: 'error',
-      filename: './logs/errors.log'
+      filename: './logs/errors.log',
     }),
     new winston.transports.File({
       level: 'info',
@@ -30,9 +30,9 @@ const logger = winston.createLogger({
       )
     }),
   ],
-  exceptionHandlers: [
-    new winston.transports.File({ filename: './logs/errors.log' })
-  ],
+  // exceptionHandlers: [
+  //   new winston.transports.File({ filename: './logs/errors.log' })
+  // ],
   exitOnError: false
 });
 

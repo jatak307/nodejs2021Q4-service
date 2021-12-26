@@ -10,12 +10,12 @@ const UserRoutes: Router<DefaultState, DefaultContext> = new Router({
 
 UserRoutes
   .get('/', async (ctx: Context) => {    
+    // throw new Error("error from users get");
     ctx.body = await getAll();
     logger.http(`GET. Url: ${ctx.url}. 
       Response status - ${ctx.status}. 
       Params: ${JSON.stringify(ctx.params)}.
       Body: ${JSON.stringify(ctx.body)}`);
-
   })
   .get('/:id', async (ctx: Context) => {
     const userId = ctx.params.id;

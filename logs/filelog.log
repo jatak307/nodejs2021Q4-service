@@ -1,6 +1,27 @@
-2021-12-26 15:00:15 +03:00 [info]: App is running on http://localhost:4000
-2021-12-26 15:00:15 +03:00 [info]: App is running on http://localhost:4000
-2021-12-26 15:00:37 +03:00 [info]: App is running on http://localhost:4000
-2021-12-26 15:00:37 +03:00 [info]: App is running on http://localhost:4000
-2021-12-26 15:00:42 +03:00 [error]: CUSTOMERROR. Status code: 404. Error message: User with ID b7f2fe2c-3d16-4c05-a302-479cc6f0de38 not found
-2021-12-26 15:00:42 +03:00 [error]: CUSTOMERROR. Status code: 404. Error message: User with ID b7f2fe2c-3d16-4c05-a302-479cc6f0de38 not found
+2021-12-26 15:13:46 +03:00 [error]: Uncaught Exception Error: Oops!
+2021-12-26 15:13:46 +03:00 [error]: Uncaught Exception Error: Oops!
+2021-12-26 15:14:23 +03:00 [info]: App is running on http://localhost:4000
+2021-12-26 15:14:23 +03:00 [info]: App is running on http://localhost:4000
+2021-12-26 15:14:23 +03:00 [error]: Unhandled rejection Error: Oops!
+2021-12-26 15:14:23 +03:00 [error]: Unhandled rejection Error: Oops!
+2021-12-26 15:14:51 +03:00 [info]: App is running on http://localhost:4000
+2021-12-26 15:14:51 +03:00 [info]: App is running on http://localhost:4000
+2021-12-26 15:14:57 +03:00 [info]: App is running on http://localhost:4000
+2021-12-26 15:14:57 +03:00 [info]: App is running on http://localhost:4000
+2021-12-26 15:14:59 +03:00 [error]: Status code: 500. Internal Server Error.
+2021-12-26 15:14:59 +03:00 [error]: Status code: 500. Internal Server Error.
+2021-12-26 15:15:09 +03:00 [info]: App is running on http://localhost:4000
+2021-12-26 15:15:09 +03:00 [info]: App is running on http://localhost:4000
+2021-12-26 15:15:11 +03:00 [http]: POST. Url: /users. 
+      Response status - 201. 
+      Params: {}.
+      Body: {"id":"8ce4f994-2129-472f-8d06-7b3994b1cd7e","name":"asdwqdwqd","login":"piuhuihiuhi"}
+2021-12-26 15:15:13 +03:00 [http]: GET. Url: /users. 
+      Response status - 200. 
+      Params: {}.
+      Body: [{"id":"8ce4f994-2129-472f-8d06-7b3994b1cd7e","name":"asdwqdwqd","login":"piuhuihiuhi","password":"1"}]
+2021-12-26 15:15:54 +03:00 [http]: DELETE. Url: /users/8ce4f994-2129-472f-8d06-7b3994b1cd7e. 
+      Response status - 204. 
+      Params: {"id":"8ce4f994-2129-472f-8d06-7b3994b1cd7e"}.
+2021-12-26 15:15:57 +03:00 [error]: CUSTOMERROR. Status code: 404. Error message: User with ID 8ce4f994-2129-472f-8d06-7b3994b1cd7e not found
+2021-12-26 15:15:57 +03:00 [error]: CUSTOMERROR. Status code: 404. Error message: User with ID 8ce4f994-2129-472f-8d06-7b3994b1cd7e not found
