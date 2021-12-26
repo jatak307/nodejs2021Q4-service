@@ -2,3 +2,5 @@
 2021-12-26 15:14:23 +03:00 [error]: Unhandled rejection Error: Oops!
 2021-12-26 15:14:59 +03:00 [error]: Status code: 500. Internal Server Error.
 2021-12-26 15:15:57 +03:00 [error]: CUSTOMERROR. Status code: 404. Error message: User with ID 8ce4f994-2129-472f-8d06-7b3994b1cd7e not found
+2021-12-26 15:50:49 +03:00 [error]: Uncaught Exception Error: Oops!
+2021-12-26 16:13:17 +03:00 [error]: CUSTOMERROR. Status code: 404. Error message: User with ID 924e769d-fbae-48f8-be76-a7d91f0ba2b1 not found

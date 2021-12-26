@@ -1,6 +1,10 @@
 import winston, { format } from 'winston';
 
+import { config } from '../common/config';
+
 const { combine, printf } = format;
+
+const { LOG_LEVEL } = config;
 
 const myFormat = printf(({message}) => `${message}`);
 const myFormatLong = printf(({level, message, timestamp}) => `${timestamp} [${level}]: ${message}`);
@@ -16,13 +20,13 @@ const logger = winston.createLogger({
       filename: './logs/errors.log',
     }),
     new winston.transports.File({
-      level: 'info',
+      level: LOG_LEVEL,
       filename: './logs/filelog.log'
     }),
-    new winston.transports.File({
-      level: 'http',
-      filename: './logs/filelog.log'
-    }),
+    // new winston.transports.File({
+    //   level: 'http',
+    //   filename: './logs/filelog.log'
+    // }),
     new winston.transports.Console({
       level: 'info',
       format: combine(
