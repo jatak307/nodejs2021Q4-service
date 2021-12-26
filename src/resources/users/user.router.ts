@@ -42,7 +42,8 @@ UserRoutes
     ctx.body = { id, name, login };
     logger.http(`POST. Url: ${ctx.url}. 
       Response status - ${ctx.status}. 
-      Params: ${JSON.stringify(ctx.params)}. ${JSON.stringify(ctx.body)}`);
+      Params: ${JSON.stringify(ctx.params)}.
+      Body: ${JSON.stringify(ctx.body)}`);
   })
   .put('/:id', async (ctx: Context) => {
     const userId = ctx.params.id;

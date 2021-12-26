@@ -1,2 +1,46 @@
 2021-12-26 14:23:33 +03:00 [error]: CUSTOMERROR. Status code: 404. Error message: User with ID b7f2fe2c-3d16-4c05-a302-479cc6f0de38 not found
 2021-12-26 14:23:45 +03:00 [error]: CUSTOMERROR. Status code: 404. Error message: User with ID b7f2fe2c-3d16-4c05-a302-479cc6f0de38 not found
+2021-12-26 14:40:33 +03:00 [error]: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/resources/tasks/task.router.ts[0m:[93m42[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'logger'.
+
+[7m42[0m     logger.http(`DELETE. Url: ${ctx.url}. Response status - ${ctx.status}. Params: ${JSON.stringify(ctx.params)}.`);
+[7m  [0m [91m    ~~~~~~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/resources/tasks/task.router.ts[0m:[93m42[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'logger'.
+
+[7m42[0m     logger.http(`DELETE. Url: ${ctx.url}. Response status - ${ctx.status}. Params: ${JSON.stringify(ctx.params)}.`);
+[7m  [0m [91m    ~~~~~~[0m
+
+    at createTSError (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:750:12)
+    at reportTSError (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:754:19)
+    at getOutput (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:941:36)
+    at Object.compile (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:1243:30)
+    at Module.m._compile (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:1370:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:1374:12)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+2021-12-26 14:40:40 +03:00 [error]: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/resources/tasks/task.router.ts[0m:[93m43[0m:[93m12[0m - [91merror[0m[90m TS2339: [0mProperty 'http' does not exist on type '(logger: Logger) => Middleware<DefaultState, DefaultContext, any>'.
+
+[7m43[0m     logger.http(`DELETE. Url: ${ctx.url}. Response status - ${ctx.status}. Params: ${JSON.stringify(ctx.params)}.`);
+[7m  [0m [91m           ~~~~[0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/resources/tasks/task.router.ts[0m:[93m43[0m:[93m12[0m - [91merror[0m[90m TS2339: [0mProperty 'http' does not exist on type '(logger: Logger) => Middleware<DefaultState, DefaultContext, any>'.
+
+[7m43[0m     logger.http(`DELETE. Url: ${ctx.url}. Response status - ${ctx.status}. Params: ${JSON.stringify(ctx.params)}.`);
+[7m  [0m [91m           ~~~~[0m
+
+    at createTSError (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:750:12)
+    at reportTSError (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:754:19)
+    at getOutput (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:941:36)
+    at Object.compile (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:1243:30)
+    at Module.m._compile (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:1370:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Object.require.extensions.<computed> [as .ts] (D:\Kat\NodeJS\rs-school\tasks\task-4\nodejs2021Q4-service\node_modules\ts-node\src\index.ts:1374:12)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)

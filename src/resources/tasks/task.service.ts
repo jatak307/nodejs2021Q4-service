@@ -1,3 +1,5 @@
+import { StatusCodes } from 'http-status-codes';
+import { CustomError } from '../../common/error';
 import { 
   getTasksArray, 
   getTask, 
@@ -46,7 +48,12 @@ async function createTask(data: CreateTask): Promise<Task> {
  */
 async function updateTask(id: string, body: UpdateTask): Promise<Task> {
   const oldTask: Task | undefined = await getTaskById(id);
-  if (oldTask === undefined) throw new Error("Board not found");
+  if (oldTask === undefined) {
+    throw new CustomError(
+      StatusCodes.NOT_FOUND,
+      `Task with ID ${id} not found`
+    );
+  }
   const taskData: UpdateTask = {
     title: body.title || oldTask.title,
     order: body.order || oldTask.order,
@@ -64,6 +71,13 @@ async function updateTask(id: string, body: UpdateTask): Promise<Task> {
  * @param id task ID
  */
 async function deleteTask(id: string): Promise<void> {
+  const task: Task | undefined = await getTask(id);
+  if (task === undefined) {
+    throw new CustomError(
+      StatusCodes.NOT_FOUND,
+      `Task with ID ${id} not found`
+    );
+  }
   await deleteTaskById(id);
 }
 
