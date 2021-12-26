@@ -30,6 +30,12 @@ async function getAllBoards(): Promise<Board[]> {
  */
 async function getBoardById(id: string): Promise<Board | undefined> {
   const board: Board | undefined = await getOneBoard(id);
+  if (board === undefined) {
+    throw new CustomError(
+      StatusCodes.NOT_FOUND,
+      `Board with ID ${id} not found`
+    );
+  }
   return board;
 }
 
@@ -71,13 +77,7 @@ async function updateBoard(id: string, body: UpdateBoard): Promise<Board> {
  * @param id board ID
  */
 async function deleteBoard(id: string): Promise<void> {
-  const board: Board | undefined = await getBoardById(id);
-  if (board === undefined) {
-    throw new CustomError(
-      StatusCodes.NOT_FOUND,
-      `Board with ID ${id} not found`
-    );
-  }
+  await getBoardById(id);
   const tasks: Task[] = await getAllTasks();
   tasks.forEach((task: Task) => {
     if (task.boardId === id) deleteTask(task.id);

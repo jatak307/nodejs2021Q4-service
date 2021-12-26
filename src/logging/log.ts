@@ -23,10 +23,6 @@ const logger = winston.createLogger({
       level: LOG_LEVEL,
       filename: './logs/filelog.log'
     }),
-    // new winston.transports.File({
-    //   level: 'http',
-    //   filename: './logs/filelog.log'
-    // }),
     new winston.transports.Console({
       level: 'info',
       format: combine(
@@ -34,9 +30,6 @@ const logger = winston.createLogger({
       )
     }),
   ],
-  // exceptionHandlers: [
-  //   new winston.transports.File({ filename: './logs/errors.log' })
-  // ],
   exitOnError: false
 });
 

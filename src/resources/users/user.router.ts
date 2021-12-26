@@ -20,20 +20,12 @@ UserRoutes
   .get('/:id', async (ctx: Context) => {
     const userId = ctx.params.id;
     const result = await getById(userId);
-    if (result) {
-      ctx.body = result;
-      logger.http(`GET. Url: ${ctx.url}. 
-        Response status - ${ctx.status}. 
-        Params: ${JSON.stringify(ctx.params)}. 
-        Body: ${JSON.stringify(ctx.body)}`
-      );
-    } else {
-      ctx.body = `Person with ID ${userId} not found`;
-      ctx.status = 404;
-      logger.http(`NOT FOUND. Url: ${ctx.url}. 
-        Response status - ${ctx.status}.
-        Body: ${ctx.body}`);
-    }
+    ctx.body = result;
+    logger.http(`GET. Url: ${ctx.url}. 
+      Response status - ${ctx.status}. 
+      Params: ${JSON.stringify(ctx.params)}. 
+      Body: ${JSON.stringify(ctx.body)}`
+    );
   })
   .post('/', async (ctx: Context) => {
     const inputData = ctx.request.body;

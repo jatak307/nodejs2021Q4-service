@@ -23,6 +23,12 @@ async function getAll(): Promise<User[]> {
  */
 async function getById(id: string): Promise<User | undefined> {
   const user: User | undefined = await getUser(id);
+  if (user === undefined) {
+    throw new CustomError(
+      StatusCodes.NOT_FOUND,
+      `User with ID ${id} not found`
+    );
+  }
   return user;
 }
 
@@ -65,13 +71,7 @@ async function update(id: string, body: UpdateUser): Promise<User> {
  * @param id user ID
  */
 async function deleteUser(id: string): Promise<void> {
-  const user: User | undefined = await getById(id);
-  if (user === undefined) {
-    throw new CustomError(
-      StatusCodes.NOT_FOUND,
-      `User with ID ${id} not found`
-    );
-  }
+  await getById(id);
   const tasks: Task[] = await getAllTasks();
   tasks.forEach((task: Task) => {
     if (task.userId === id) {

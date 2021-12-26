@@ -19,20 +19,12 @@ TaskRoutes
   .get('/:id', async (ctx: Context) => {
     const taskId = ctx.params.id;
     const result = await getTaskById(taskId);
-    if (result) {
-      ctx.body = result;
-      logger.http(`GET. Url: ${ctx.url}. 
-        Response status - ${ctx.status}. 
-        Params: ${JSON.stringify(ctx.params)}. 
-        Body: ${JSON.stringify(ctx.body)}`
-      );
-    } else {
-      ctx.body = `Task with ID ${taskId} not found`;
-      ctx.status = 404;
-      logger.http(`NOT FOUND. Url: ${ctx.url}. 
-        Response status - ${ctx.status}.
-        Body: ${ctx.body}`);
-    }
+    ctx.body = result;
+    logger.http(`GET. Url: ${ctx.url}. 
+      Response status - ${ctx.status}. 
+      Params: ${JSON.stringify(ctx.params)}. 
+      Body: ${JSON.stringify(ctx.body)}`
+    );
   })
   .post('/', async (ctx: Context) => {
     const inputData =  ctx.request.body;

@@ -27,6 +27,12 @@ async function getAllTasks(): Promise<Task[]> {
  */
 async function getTaskById(id: string): Promise<Task | undefined> {
   const task: Task | undefined = await getTask(id);
+  if (task === undefined) {
+    throw new CustomError(
+      StatusCodes.NOT_FOUND,
+      `Task with ID ${id} not found`
+    );
+  }
   return task;
 }
 
@@ -71,13 +77,7 @@ async function updateTask(id: string, body: UpdateTask): Promise<Task> {
  * @param id task ID
  */
 async function deleteTask(id: string): Promise<void> {
-  const task: Task | undefined = await getTask(id);
-  if (task === undefined) {
-    throw new CustomError(
-      StatusCodes.NOT_FOUND,
-      `Task with ID ${id} not found`
-    );
-  }
+  await getTask(id);
   await deleteTaskById(id);
 }
 
