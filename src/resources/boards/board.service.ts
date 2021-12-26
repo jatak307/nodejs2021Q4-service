@@ -1,3 +1,4 @@
+import { StatusCodes } from 'http-status-codes';
 import { 
   getBoards, 
   getOneBoard, 
@@ -10,6 +11,7 @@ import { CreateBoard, UpdateBoard } from './board.models';
 import { getAllTasks, deleteTask } from '../tasks/task.service';
 import { Board } from './board.model';
 import { Task } from '../tasks/task.model';
+import { CustomError } from '../../common/error';
 
 
 /**
@@ -49,7 +51,12 @@ async function createBoard(data: CreateBoard): Promise<Board> {
  */
 async function updateBoard(id: string, body: UpdateBoard): Promise<Board> {
   const oldBoard: Board | undefined = await getBoardById(id);
-  if (oldBoard === undefined) throw new Error("Board not found");
+  if (oldBoard === undefined) {
+    throw new CustomError(
+      StatusCodes.NOT_FOUND,
+      `Board with ID ${id} not found`
+    );
+  }
   const boardData: CreateBoard = {
     title: body.title || oldBoard.title,
     columns: body.columns || oldBoard.columns
@@ -64,6 +71,13 @@ async function updateBoard(id: string, body: UpdateBoard): Promise<Board> {
  * @param id board ID
  */
 async function deleteBoard(id: string): Promise<void> {
+  const board: Board | undefined = await getBoardById(id);
+  if (board === undefined) {
+    throw new CustomError(
+      StatusCodes.NOT_FOUND,
+      `Board with ID ${id} not found`
+    );
+  }
   const tasks: Task[] = await getAllTasks();
   tasks.forEach((task: Task) => {
     if (task.boardId === id) deleteTask(task.id);
