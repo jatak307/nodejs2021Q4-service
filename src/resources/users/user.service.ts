@@ -1,9 +1,11 @@
+import { StatusCodes } from 'http-status-codes';
 import { getUsers, getUser, createUser, updateUser, removeUser } from './user.memory.repository';
 import { CreateUser, UpdateUser } from './user.models';
 import { User } from './user.model';
 
 import { getAllTasks } from '../tasks/task.service';
 import { Task } from '../tasks/task.model';
+import { CustomError } from '../../common/error';
 
 /**
  * Waits to receive an array of users from the database
@@ -42,7 +44,12 @@ async function create(data: CreateUser): Promise<User> {
  */
 async function update(id: string, body: UpdateUser): Promise<User> {
   const oldUser: User | undefined = await getById(id);
-  if (oldUser === undefined) throw new Error("User not found");
+  if (oldUser === undefined) {
+    throw new CustomError(
+      StatusCodes.NOT_FOUND,
+      `User with ID ${id} not found`
+    );
+  }
   const userData: CreateUser = {
     name: body.name || oldUser.name,
     login: body.login || oldUser.login,
@@ -58,6 +65,13 @@ async function update(id: string, body: UpdateUser): Promise<User> {
  * @param id user ID
  */
 async function deleteUser(id: string): Promise<void> {
+  const user: User | undefined = await getById(id);
+  if (user === undefined) {
+    throw new CustomError(
+      StatusCodes.NOT_FOUND,
+      `User with ID ${id} not found`
+    );
+  }
   const tasks: Task[] = await getAllTasks();
   tasks.forEach((task: Task) => {
     if (task.userId === id) {

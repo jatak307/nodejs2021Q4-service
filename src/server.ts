@@ -1,6 +1,6 @@
 import { config } from './common/config';
 import { app } from './app';
-import { logger } from './log';
+import { logger } from './logging/log';
 
 const { PORT } = config;
 
