@@ -12,9 +12,9 @@ UserRoutes
   .get('/', async (ctx: Context) => {    
     ctx.body = await getAll();
     logger.http(`GET. Url: ${ctx.url}. 
-    Response status - ${ctx.status}. 
-    Params: ${JSON.stringify(ctx.params)}.
-    Body: ${JSON.stringify(ctx.body)}`);
+      Response status - ${ctx.status}. 
+      Params: ${JSON.stringify(ctx.params)}.
+      Body: ${JSON.stringify(ctx.body)}`);
 
   })
   .get('/:id', async (ctx: Context) => {
@@ -30,7 +30,8 @@ UserRoutes
     } else {
       ctx.body = `Person with ID ${userId} not found`;
       ctx.status = 404;
-      logger.http(`NOT FOUND. Url: ${ctx.url}. Response status - ${ctx.status}.
+      logger.http(`NOT FOUND. Url: ${ctx.url}. 
+        Response status - ${ctx.status}.
         Body: ${ctx.body}`);
     }
   })
@@ -60,7 +61,9 @@ UserRoutes
     const userId = ctx.params.id;
     await deleteUser(userId);
     ctx.status = 204;
-    logger.http(`DELETE. Url: ${ctx.url}. Response status - ${ctx.status}. Params: ${JSON.stringify(ctx.params)}.`);
+    logger.http(`DELETE. Url: ${ctx.url}. 
+      Response status - ${ctx.status}. 
+      Params: ${JSON.stringify(ctx.params)}.`);
   });
 
 export { UserRoutes };

@@ -29,7 +29,8 @@ TaskRoutes
     } else {
       ctx.body = `Task with ID ${taskId} not found`;
       ctx.status = 404;
-      logger.http(`NOT FOUND. Url: ${ctx.url}. Response status - ${ctx.status}.
+      logger.http(`NOT FOUND. Url: ${ctx.url}. 
+        Response status - ${ctx.status}.
         Body: ${ctx.body}`);
     }
   })
@@ -59,7 +60,9 @@ TaskRoutes
     const taskdId = ctx.params.id;
     await deleteTask(taskdId);
     ctx.status = 204;
-    logger.http(`DELETE. Url: ${ctx.url}. Response status - ${ctx.status}. Params: ${JSON.stringify(ctx.params)}.`);
+    logger.http(`DELETE. Url: ${ctx.url}. 
+      Response status - ${ctx.status}. 
+      Params: ${JSON.stringify(ctx.params)}.`);
   });
 
 export { TaskRoutes };
