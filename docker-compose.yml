@@ -1,0 +1,36 @@
+version: '3'
+services:
+  node:
+    build: .
+    restart: always
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - postgres
+    volumes:
+      - service-volume:/usr/app/logs
+      - ./:/usr/app
+    networks:
+      - app_net
+
+  postgres:
+    build: ./database/
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRESS_PASSWORD: ${POSTGRESS_PASSWORD}
+      POSTGRES_DB: ${POSTGRESS_DB}
+    volumes:
+      - data-volume:/usr/app/logs
+      - ./:/usr/app
+    networks:
+      - app_net
+
+volumes:
+  data-volume:
+  service-volume:
+
+networks:
+  app_net:
+    driver: bridge
