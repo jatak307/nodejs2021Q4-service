@@ -8,17 +8,29 @@ services:
     depends_on:
       - postgres
     volumes:
-      - data-volume:/usr/app
+      - service-volume:/usr/app/logs
+      - ./:/usr/app
+    networks:
+      - app_net
 
   postgres:
     build: ./database/
-    restart: always
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRESS_PASSWORD: ${POSTGRESS_PASSWORD}
       POSTGRES_DB: ${POSTGRESS_DB}
+    volumes:
+      - data-volume:/usr/app/logs
+      - ./:/usr/app
+    networks:
+      - app_net
 
 volumes:
   data-volume:
+  service-volume:
+
+networks:
+  app_net:
+    driver: bridge
