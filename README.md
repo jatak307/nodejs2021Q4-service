@@ -1,5 +1,12 @@
 # RS School REST service
 
+## Start DOCKER
+1. Clone the repository to your computer
+2. Go to the project folder and open the console in it
+3. Run the command in the console: **docker-compose build**
+4. Then the command: **docker-compose up**
+5. To kill containers, enter the command: **docker-compose down**
+
 ## Prerequisites
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
