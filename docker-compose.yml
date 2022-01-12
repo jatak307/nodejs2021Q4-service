@@ -17,18 +17,22 @@ services:
     build: ./database/
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    env_file:
+      - .env
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRESS_PASSWORD: ${POSTGRESS_PASSWORD}
       POSTGRES_DB: ${POSTGRESS_DB}
     volumes:
-      - data-volume:/usr/app/logs
+      - data-volume:/usr/app/data
+      - logs-volume:/usr/app/logs
       - ./:/usr/app
     networks:
       - app_net
 
 volumes:
   data-volume:
+  logs-volume:
   service-volume:
 
 networks:
