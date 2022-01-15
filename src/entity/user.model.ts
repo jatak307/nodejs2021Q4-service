@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity } from "typeorm";
-import { v4 as uuidV4 } from 'uuid';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 /**
  * This class sets the state for the user object
@@ -17,5 +16,4 @@ export class User extends BaseEntity {
 
   @Column()
     password!: string;
-
 }

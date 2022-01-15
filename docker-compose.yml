@@ -8,7 +8,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - service-volume:/usr/app/logs
+      - logs:/usr/app/logs
       - ./:/usr/app
     networks:
       - app_net
@@ -24,15 +24,14 @@ services:
       POSTGRESS_PASSWORD: ${POSTGRESS_PASSWORD}
       POSTGRES_DB: ${POSTGRESS_DB}
     volumes:
-      - data-volume:/usr/app/data
-      - logs-volume:/usr/app/logs
+      - data:/var/lib/postgresql/data
       - ./:/usr/app
     networks:
       - app_net
 
 volumes:
-  data-volume:
-  logs-volume:
+  data:
+  logs:
   service-volume:
 
 networks:
