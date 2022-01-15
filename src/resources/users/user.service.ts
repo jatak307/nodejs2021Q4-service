@@ -1,18 +1,19 @@
 import { StatusCodes } from 'http-status-codes';
 import { getUsers, getUser, createUser, updateUser, removeUser } from './user.memory.repository';
 import { CreateUser, UpdateUser } from './user.models';
-import { User } from './user.model';
 
 import { getAllTasks } from '../tasks/task.service';
 import { Task } from '../tasks/task.model';
 import { CustomError } from '../../common/error';
 
+import { User as UserDB } from '../../entity/user.model';
+
 /**
  * Waits to receive an array of users from the database
  * @returns a promise of an array of users
  */
-async function getAll(): Promise<User[]> {
-  const allUsers: User[] = await getUsers();
+async function getAll(): Promise<UserDB[]> {
+  const allUsers: UserDB[] = await getUsers();
   return allUsers;
 }
 
@@ -21,8 +22,8 @@ async function getAll(): Promise<User[]> {
  * @param id user ID
  * @returns User or undefined Promise
  */
-async function getById(id: string): Promise<User | undefined> {
-  const user: User | undefined = await getUser(id);
+async function getById(id: string): Promise<UserDB | undefined> {
+  const user: UserDB | undefined = await getUser(id);
   if (user === undefined) {
     throw new CustomError(
       StatusCodes.NOT_FOUND,
@@ -37,8 +38,8 @@ async function getById(id: string): Promise<User | undefined> {
  * @param body data for create user
  * @returns New User Promise
  */
-async function create(data: CreateUser): Promise<User> {
-  const createdUser: User = await createUser(data);
+async function create(data: UserDB): Promise<UserDB> {
+  const createdUser: UserDB = await createUser(data);
   return createdUser;
 }
 
@@ -48,8 +49,8 @@ async function create(data: CreateUser): Promise<User> {
  * @param body new data for this user
  * @returns Updated User Promise
  */
-async function update(id: string, body: UpdateUser): Promise<User> {
-  const oldUser: User | undefined = await getById(id);
+async function update(id: string, body: UpdateUser): Promise<UserDB | undefined> {
+  const oldUser: UserDB | undefined = await getById(id);
   if (oldUser === undefined) {
     throw new CustomError(
       StatusCodes.NOT_FOUND,
@@ -61,7 +62,7 @@ async function update(id: string, body: UpdateUser): Promise<User> {
     login: body.login || oldUser.login,
     password: body.password || oldUser.password
   };
-  const updatedUser: User = await updateUser(id, userData);
+  const updatedUser: UserDB | undefined = await updateUser(id, userData);
   return updatedUser;
 }
 

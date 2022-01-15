@@ -1,17 +1,19 @@
-import { User } from './user.model';
+import { User as UserDB } from '../../entity/user.model';
+
 import { CreateUser } from './user.models';
 
 /**
  * This is a collection of data of type {@link User}. At first it is empty collection
  */
-const usersData: Map<string, User> = new Map();
+// const usersData: Map<string, User> = new Map();
+
 
 /**
  * Gets users from the database
  * @returns Array of {@link User} or empty array
  */
-function getUsers(): User[] {
-  return [...usersData.values()];
+function getUsers(): Promise<UserDB[]> {
+  return UserDB.find();
 }
 
 /**
@@ -19,8 +21,8 @@ function getUsers(): User[] {
  * @param id user ID
  * @returns Object of type {@link User} or undefined
  */
-function getUser(id: string): User | undefined {
-  return usersData.get(id);
+async function getUser(id: string): Promise<UserDB | undefined> {
+  return UserDB.findOne(id);
 }
 
 /**
@@ -28,10 +30,10 @@ function getUser(id: string): User | undefined {
  * @param obj object of type CreateUser (with required fields name, login and password)
  * @returns Object of type {@link User} 
  */
-function createUser(obj: CreateUser): User {
-  const user: User = new User(obj);
-  usersData.set(user.id, user);
-  return user;
+async function createUser(obj: UserDB): Promise<UserDB> {
+  const user2 = UserDB.create(obj);
+  await UserDB.save(user2);
+  return user2;
 }
 
 /**
@@ -40,10 +42,9 @@ function createUser(obj: CreateUser): User {
  * @param body object of type {@link CreateUser | CreateUser interface}
  * @returns Object of type {@link User} with changed properties
  */
-function updateUser(id: string, body: CreateUser): User {
-  let updatedUser: User | undefined = usersData.get(id);
-  updatedUser = { id, ...body };
-  usersData.set(id, updatedUser);
+async function updateUser(id: string, body: CreateUser): Promise<UserDB | undefined> {
+  await UserDB.update(id, {...body});
+  const updatedUser: UserDB | undefined = await UserDB.findOne(id);
   return updatedUser;
 }
 
@@ -51,8 +52,8 @@ function updateUser(id: string, body: CreateUser): User {
  * Removes the user with the specified ID from the database
  * @param id user ID
  */
-function removeUser(id: string): void {
-  usersData.delete(id);
+async function removeUser(id: string): Promise<void> {
+  await UserDB.delete({id});
 }
 
 export { getUsers, getUser, createUser, updateUser, removeUser };
