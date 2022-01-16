@@ -1,3 +1,5 @@
+import { Board } from "../../entity/board.model";
+
 interface CreateTask {
   title: string,
   order: number,
@@ -5,9 +7,9 @@ interface CreateTask {
 }
 
 interface UpdateTask {
-  userId: string | null,
-  boardId: string,
-  columnId: string | null,
+  // userId: string | null,
+  // boardId: string | Board,
+  columnId: string,
   title: string,
   order: number,
   description: string,

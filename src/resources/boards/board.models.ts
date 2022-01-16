@@ -1,3 +1,5 @@
+import { Columns } from "../../entity/column.model";
+
 interface Column {
   id: string,
   title: string,
@@ -6,7 +8,7 @@ interface Column {
 
 interface CreateBoard {
   title: string,
-  columns: never[],
+  columns: Columns[] | null,
 }
 
 interface UpdateBoard {

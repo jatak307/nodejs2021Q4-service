@@ -1,17 +1,13 @@
-import { Board } from './board.model';
+import { Board } from '../../entity/board.model';
 import { CreateBoard } from './board.models';
-
-/**
- * This is a collection of data of type {@link Board}. At first it is empty collection
- */
-const boardsData: Map<string, Board> = new Map();
 
 /**
  * Gets boards from the database
  * @returns Array of {@link Board} or empty array
  */
-function getBoards(): Board[] {
-  return [...boardsData.values()];
+async function getBoards(): Promise<Board[]> {
+  const bords = await Board.find();  
+  return bords;
 }
 
 /**
@@ -19,8 +15,9 @@ function getBoards(): Board[] {
  * @param id board ID
  * @returns Object of type {@link Board} or undefined
  */
-function getOneBoard(id: string): Board | undefined {
-  return boardsData.get(id);
+async function getOneBoard(id: string): Promise<Board | undefined> {
+  const board = await Board.findOne(id);
+  return board;
 }
 
 /**
@@ -28,9 +25,9 @@ function getOneBoard(id: string): Board | undefined {
  * @param obj object of type CreateBoard
  * @returns Object of type {@link Board} 
  */
-function createNewBoard(obj: CreateBoard): Board {
-  const board = new Board(obj);
-  boardsData.set(board.id, board);
+async function createNewBoard(obj: CreateBoard): Promise<Board> {
+  const board = Board.create(obj);
+  await Board.save(board);
   return board;
 }
 
@@ -40,18 +37,18 @@ function createNewBoard(obj: CreateBoard): Board {
  * @param body object of type {@link CreateBoard | CreateBoard interface}
  * @returns Object of type {@link Board} with changed properties
  */
-function updateBoardById(id: string, body: CreateBoard): Board {
-  let updatedBoard = boardsData.get(id);
-  updatedBoard = { id, ...body };
-  boardsData.set(id, updatedBoard);
-  return updatedBoard;
+async function updateBoardById(id: string, body: CreateBoard): Promise<Board | undefined > {
+  await Board.update(id, {...body});
+  const updatedTask: Board | undefined = await Board.findOne(id);
+  return updatedTask;
 }
 
 /**
  * Removes the board with the specified ID from the database
  * @param id board ID
  */
-function deleteBoardById(id: string): void {
-  boardsData.delete(id);
+async function deleteBoardById(id: string): Promise<void> {
+  await Board.delete(id);
 }
+
 export { getBoards, getOneBoard, createNewBoard, updateBoardById, deleteBoardById };

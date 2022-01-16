@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from "typeorm";
+import { Board } from "./board.model";
+import { User } from "./user.model";
 
 /**
  * This class sets the state and behavior for the task object
@@ -17,20 +19,20 @@ export class Task extends BaseEntity {
   @Column()
     description!: string;
 
-  @Column({nullable: true, default: 'null'})
-    userId!: string | null;
+  @ManyToOne(() => Board, board => board.id)
+    boardId!: Board;
 
-  @Column()
-    boardId!: string;
+  @Column({ nullable: true })
+    columnId!: string;
 
-  @Column({nullable: true, default: null})
-    columnId!: string | null;
+  @ManyToOne(() => User, user => user.id)
+    userId!: User | null
 
-  /**
- * This method overwrites the userId for the class instance
- * @param newUserID id of the user to whom the instance of the class should be assigned. Default null
- */
-  public setUser(newUserID = null): void {
-    this.userId = newUserID;
-  }
+//   /**
+//  * This method overwrites the userId for the class instance
+//  * @param newUserID id of the user to whom the instance of the class should be assigned. Default null
+//  */
+//   public setUser(newUserID = null): void {
+//     this.userId = newUserID;
+//   }
 }

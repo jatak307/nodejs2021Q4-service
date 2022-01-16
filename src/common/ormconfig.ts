@@ -1,4 +1,7 @@
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { Board } from '../entity/board.model';
+import { Columns } from '../entity/column.model';
+import { Task } from '../entity/task.model';
 
 import { User } from '../entity/user.model';
 
@@ -12,7 +15,10 @@ const typeOrmConfig: PostgresConnectionOptions = {
   synchronize: true,
   logging: false,
   entities: [
-    User
+    User,
+    Board,
+    Task,
+    Columns
   ]
 };
 

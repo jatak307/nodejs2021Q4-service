@@ -72,13 +72,13 @@ async function update(id: string, body: UpdateUser): Promise<UserDB | undefined>
  * @param id user ID
  */
 async function deleteUser(id: string): Promise<void> {
-  await getById(id);
-  const tasks: Task[] = await getAllTasks();
-  tasks.forEach((task: Task) => {
-    if (task.userId === id) {
-      task.setUser();
-    }
-  });
+  // await getById(id);
+  // const tasks: Task[] = await getAllTasks();
+  // tasks.forEach((task: Task) => {
+  //   if (task.userId === id) {
+  //     task.setUser();
+  //   }
+  // });
   await removeUser(id);
 }
 

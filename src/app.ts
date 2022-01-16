@@ -1,6 +1,5 @@
 import Koa from 'koa';
 import bodyParser from "koa-bodyparser";
-import "reflect-metadata";
 
 import { UserRoutes } from './resources/users/user.router';
 import { BoardsRoutes } from './resources/boards/board.router';

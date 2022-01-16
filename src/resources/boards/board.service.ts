@@ -9,8 +9,8 @@ import {
 
 import { CreateBoard, UpdateBoard } from './board.models';
 import { getAllTasks, deleteTask } from '../tasks/task.service';
-import { Board } from './board.model';
-import { Task } from '../tasks/task.model';
+import { Board } from '../../entity/board.model';
+import { Task } from '../../entity/task.model';
 import { CustomError } from '../../common/error';
 
 
@@ -19,7 +19,11 @@ import { CustomError } from '../../common/error';
  * @returns a promise of an array of boards
  */
 async function getAllBoards(): Promise<Board[]> {
+  console.log('getAllBoards:');
+  
   const allBoards: Board[] = await getBoards();
+  console.log(allBoards);
+  
   return allBoards;
 }
 
@@ -55,7 +59,7 @@ async function createBoard(data: CreateBoard): Promise<Board> {
  * @param body new data for this board
  * @returns Updated Board Promise
  */
-async function updateBoard(id: string, body: UpdateBoard): Promise<Board> {
+async function updateBoard(id: string, body: UpdateBoard): Promise<Board | undefined> {
   const oldBoard: Board | undefined = await getBoardById(id);
   if (oldBoard === undefined) {
     throw new CustomError(
@@ -67,7 +71,7 @@ async function updateBoard(id: string, body: UpdateBoard): Promise<Board> {
     title: body.title || oldBoard.title,
     columns: body.columns || oldBoard.columns
   };
-  const updatedBoard: Board = await updateBoardById(id, boardData);
+  const updatedBoard: Board | undefined = await updateBoardById(id, boardData);
   return updatedBoard;
 }
 
@@ -77,11 +81,11 @@ async function updateBoard(id: string, body: UpdateBoard): Promise<Board> {
  * @param id board ID
  */
 async function deleteBoard(id: string): Promise<void> {
-  await getBoardById(id);
-  const tasks: Task[] = await getAllTasks();
-  tasks.forEach((task: Task) => {
-    if (task.boardId === id) deleteTask(task.id);
-  });
+  // await getBoardById(id);
+  // const tasks: Task[] = await getAllTasks();
+  // tasks.forEach((task: Task) => {
+  //   if (task.boardId === id) deleteTask(task.id);
+  // });
   await deleteBoardById(id);
 }
 
