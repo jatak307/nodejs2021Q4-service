@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 import { getUsers, getUser, createUser, updateUser, removeUser } from './user.memory.repository';
 import { CreateUser, UpdateUser } from './user.models';
 
-import { getAllTasks } from '../tasks/task.service';
+import { getAllTasks, updateTask } from '../tasks/task.service';
 import { Task } from '../../entity/task.model';
 import { CustomError } from '../../common/error';
 
@@ -72,13 +72,13 @@ async function update(id: string, body: UpdateUser): Promise<UserDB | undefined>
  * @param id user ID
  */
 async function deleteUser(id: string): Promise<void> {
-  // await getById(id);
-  // const tasks: Task[] = await getAllTasks();
-  // tasks.forEach((task: Task) => {
-  //   if (task.userId === id) {
-  //     task.setUser();
-  //   }
-  // });
+  const tasks: Task[] = await getAllTasks();
+  tasks.forEach(async (task: Task) => {
+    if (task.userId === id) {
+      const {boardId, columnId, title, order, description, userId = null} = task;
+      await updateTask(task.id, { userId, boardId, columnId, title, order, description});
+    }
+  });
   await removeUser(id);
 }
 

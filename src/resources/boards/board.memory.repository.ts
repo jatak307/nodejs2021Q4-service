@@ -1,4 +1,5 @@
 import { Board } from '../../entity/board.model';
+import { Task } from '../../entity/task.model';
 import { CreateBoard } from './board.models';
 
 /**
@@ -37,10 +38,10 @@ async function createNewBoard(obj: CreateBoard): Promise<Board> {
  * @param body object of type {@link CreateBoard | CreateBoard interface}
  * @returns Object of type {@link Board} with changed properties
  */
-async function updateBoardById(id: string, body: CreateBoard): Promise<Board | undefined > {
+async function updateBoardById(id: string, body: CreateBoard): Promise<Board | undefined > {  
   await Board.update(id, {...body});
-  const updatedTask: Board | undefined = await Board.findOne(id);
-  return updatedTask;
+  const updatedBoard: Board | undefined = await Board.findOne(id);
+  return updatedBoard;
 }
 
 /**
@@ -48,6 +49,10 @@ async function updateBoardById(id: string, body: CreateBoard): Promise<Board | u
  * @param id board ID
  */
 async function deleteBoardById(id: string): Promise<void> {
+  const tasks = await Task.find({where: {boardId: id}});
+  tasks.forEach(async(t) => {
+    await Task.delete(t.id)
+  });
   await Board.delete(id);
 }
 

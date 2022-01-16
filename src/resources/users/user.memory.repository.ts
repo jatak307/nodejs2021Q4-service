@@ -1,3 +1,4 @@
+import { Task } from '../../entity/task.model';
 import { User as UserDB } from '../../entity/user.model';
 
 import { CreateUser } from './user.models';
@@ -55,6 +56,10 @@ async function updateUser(id: string, body: CreateUser): Promise<UserDB | undefi
  * @param id user ID
  */
 async function removeUser(id: string): Promise<void> {
+  const tasks = await Task.find({where: {boardId: id}});
+  tasks.forEach(async(t) => {
+    await Task.delete(t.id)
+  });
   await UserDB.delete({id});
 }
 

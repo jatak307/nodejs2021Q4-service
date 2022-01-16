@@ -56,7 +56,7 @@ async function createBoard(data: CreateBoard): Promise<Board> {
  * @returns Updated Board Promise
  */
 async function updateBoard(id: string, body: UpdateBoard): Promise<Board | undefined> {
-  const oldBoard: Board | undefined = await getBoardById(id);
+  const oldBoard: Board | undefined = await getBoardById(id);  
   if (oldBoard === undefined) {
     throw new CustomError(
       StatusCodes.NOT_FOUND,
@@ -77,11 +77,6 @@ async function updateBoard(id: string, body: UpdateBoard): Promise<Board | undef
  * @param id board ID
  */
 async function deleteBoard(id: string): Promise<void> {
-  // await getBoardById(id);
-  // const tasks: Task[] = await getAllTasks();
-  // tasks.forEach((task: Task) => {
-  //   if (task.boardId === id) deleteTask(task.id);
-  // });
   await deleteBoardById(id);
 }
 

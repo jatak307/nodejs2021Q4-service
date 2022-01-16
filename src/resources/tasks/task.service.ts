@@ -64,8 +64,8 @@ async function updateTask(id: string, body: UpdateTask): Promise<Task | undefine
     title: body.title || oldTask.title,
     order: body.order || oldTask.order,
     description: body.description || oldTask.description,
-    // userId: oldTask.userId,
-    // boardId: body.boardId || oldTask.boardId,
+    userId: oldTask.userId || null,
+    boardId: body.boardId || oldTask.boardId,
     columnId: body.columnId || oldTask.columnId
   };
   const updatedTask: Task | undefined = await updateTaskById(id, taskData);

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn } from "typeorm";
 import { Board } from "./board.model";
 import { User } from "./user.model";
 
@@ -19,20 +19,20 @@ export class Task extends BaseEntity {
   @Column()
     description!: string;
 
-  @ManyToOne(() => Board, board => board.id)
-    boardId!: Board;
+  @ManyToOne(() => Board, board => board.id, { cascade: true, onDelete: "CASCADE" })
+    boardId!: string;
 
   @Column({ nullable: true })
     columnId!: string;
 
-  @ManyToOne(() => User, user => user.id)
-    userId!: User | null
+  @ManyToOne(() => User, user => user.id, { cascade: true, onDelete: "CASCADE" })
+    userId!: string | null
 
-//   /**
-//  * This method overwrites the userId for the class instance
-//  * @param newUserID id of the user to whom the instance of the class should be assigned. Default null
-//  */
-//   public setUser(newUserID = null): void {
-//     this.userId = newUserID;
-//   }
+  /**
+ * This method overwrites the userId for the class instance
+ * @param newUserID id of the user to whom the instance of the class should be assigned. Default null
+ */
+  public setUser(newUserID = null): void {
+    this.userId = newUserID;
+  }
 }

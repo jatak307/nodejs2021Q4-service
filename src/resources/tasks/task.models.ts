@@ -7,8 +7,8 @@ interface CreateTask {
 }
 
 interface UpdateTask {
-  // userId: string | null,
-  // boardId: string | Board,
+  userId: string | null,
+  boardId: string,
   columnId: string,
   title: string,
   order: number,

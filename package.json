@@ -59,6 +59,7 @@
     "typeorm": "^0.2.41",
     "typeorm-extension": "^1.0.3",
     "uuid": "8.3.2",
+    "winston": "^3.4.0",
     "yamljs": "0.3.0"
   },
   "devDependencies": {

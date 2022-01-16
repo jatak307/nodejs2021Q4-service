@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, JoinColumn } from "typeorm";
 import { Columns } from "./column.model";
 import { Task } from "./task.model";
 
@@ -16,6 +16,6 @@ export class Board extends BaseEntity {
   @OneToMany(() => Task, task => task.boardId)
     task!: Task[] | null;
 
-  @OneToMany(() => Columns, columns => columns.board)
+  @OneToMany(() => Columns, columns => columns.board, { eager: true })
     columns!: Columns[] | null;
 }
