@@ -19,11 +19,7 @@ import { CustomError } from '../../common/error';
  * @returns a promise of an array of boards
  */
 async function getAllBoards(): Promise<Board[]> {
-  console.log('getAllBoards:');
-  
   const allBoards: Board[] = await getBoards();
-  console.log(allBoards);
-  
   return allBoards;
 }
 
