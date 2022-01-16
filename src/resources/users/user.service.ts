@@ -3,7 +3,7 @@ import { getUsers, getUser, createUser, updateUser, removeUser } from './user.me
 import { CreateUser, UpdateUser } from './user.models';
 
 import { getAllTasks } from '../tasks/task.service';
-import { Task } from '../tasks/task.model';
+import { Task } from '../../entity/task.model';
 import { CustomError } from '../../common/error';
 
 import { User as UserDB } from '../../entity/user.model';

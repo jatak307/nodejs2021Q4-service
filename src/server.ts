@@ -6,7 +6,7 @@ import { logger } from './logging/log';
 import { typeOrmConfig } from './common/ormconfig';
 
 // createConnection(typeOrmConfig);
-  // await createDatabase({ ifNotExist: true }, typeOrmConfig);
+// await createDatabase({ ifNotExist: true }, typeOrmConfig);
 
 (async () => {
   await createConnection(typeOrmConfig);

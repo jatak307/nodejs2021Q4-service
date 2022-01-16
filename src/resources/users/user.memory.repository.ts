@@ -12,8 +12,9 @@ import { CreateUser } from './user.models';
  * Gets users from the database
  * @returns Array of {@link User} or empty array
  */
-function getUsers(): Promise<UserDB[]> {
-  return UserDB.find();
+async function getUsers(): Promise<UserDB[]> {
+  const users = await UserDB.find();
+  return users;
 }
 
 /**
@@ -22,7 +23,8 @@ function getUsers(): Promise<UserDB[]> {
  * @returns Object of type {@link User} or undefined
  */
 async function getUser(id: string): Promise<UserDB | undefined> {
-  return UserDB.findOne(id);
+  const user = await UserDB.findOne(id);
+  return user;
 }
 
 /**
@@ -31,9 +33,9 @@ async function getUser(id: string): Promise<UserDB | undefined> {
  * @returns Object of type {@link User} 
  */
 async function createUser(obj: UserDB): Promise<UserDB> {
-  const user2 = UserDB.create(obj);
-  await UserDB.save(user2);
-  return user2;
+  const user = UserDB.create(obj);
+  await UserDB.save(user);
+  return user;
 }
 
 /**

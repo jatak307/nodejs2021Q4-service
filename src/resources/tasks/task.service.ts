@@ -7,7 +7,7 @@ import {
   updateTaskById, 
   deleteTaskById 
 } from './task.memory.repository';
-import { Task } from './task.model';
+import { Task } from '../../entity/task.model';
 import { CreateTask, UpdateTask } from './task.models';
 
 
@@ -52,7 +52,7 @@ async function createTask(data: CreateTask): Promise<Task> {
  * @param body new data for this task
  * @returns Updated Task Promise
  */
-async function updateTask(id: string, body: UpdateTask): Promise<Task> {
+async function updateTask(id: string, body: UpdateTask): Promise<Task | undefined> {
   const oldTask: Task | undefined = await getTaskById(id);
   if (oldTask === undefined) {
     throw new CustomError(
@@ -68,7 +68,7 @@ async function updateTask(id: string, body: UpdateTask): Promise<Task> {
     boardId: body.boardId || oldTask.boardId,
     columnId: body.columnId || oldTask.columnId
   };
-  const updatedTask: Task = await updateTaskById(id, taskData);
+  const updatedTask: Task | undefined = await updateTaskById(id, taskData);
   return updatedTask;
 }
 
