@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import {MigrationInterface, QueryRunner} from "typeorm";
+import { generateHash } from '../common/auth';
 
 export class firstMigration1642951518922 implements MigrationInterface {
     name = 'firstMigration1642951518922'
@@ -12,6 +13,7 @@ export class firstMigration1642951518922 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "tasks" ADD CONSTRAINT "FK_8a75fdea98c72c539a0879cb0d1" FOREIGN KEY ("boardId") REFERENCES "boards"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "tasks" ADD CONSTRAINT "FK_166bd96559cb38595d392f75a35" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "columns" ADD CONSTRAINT "FK_ac92bfd7ba33174aabef610f361" FOREIGN KEY ("boardId") REFERENCES "boards"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`INSERT INTO "users" (name, login, password) VALUES ('admin', 'admin', '${await generateHash("admin")}')`)
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
