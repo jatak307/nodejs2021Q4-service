@@ -18,12 +18,11 @@ const verifyToken = (ctx: Context, next: Next) => {
   }
 
   try {
-    const decode = jwt.verify(token, JWT_SECRET_KEY as unknown as string);
+    jwt.verify(token, JWT_SECRET_KEY as unknown as string);
     return next();
   } catch(err) {
     ctx.body = 'Invalid Token';
     ctx.status = 401;
-    console.log(err);
   }
 }
 
