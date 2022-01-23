@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
 // import { Columns } from "./column.model";
 import { Columns } from "../resources/boards/board.models";
 import { Task } from "./task.model";

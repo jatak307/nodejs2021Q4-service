@@ -13,7 +13,7 @@ const typeOrmConfig: PostgresConnectionOptions = {
   password: config.POSTGRES_PASSWORD,
   database: config.POSTGRES_DB,
   synchronize: true,
-  logging: true,
+  logging: false,
   entities: [
     User,
     Board,
