@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, JoinColumn } from "typeorm";
-import { Columns } from "./column.model";
+// import { Columns } from "./column.model";
+import { Columns } from "../resources/boards/board.models";
 import { Task } from "./task.model";
 
 /**
@@ -13,9 +14,12 @@ export class Board extends BaseEntity {
   @Column()
     title!: string;
 
-  @OneToMany(() => Task, task => task.boardId)
-    task!: Task[] | null;
+  @OneToMany(() => Task, (task) => task.board)
+    tasks!: Task[];
 
-  @OneToMany(() => Columns, columns => columns.board, { eager: true })
-    columns!: Columns[] | null;
+  // @OneToMany(() => Columns, columns => columns.board, { eager: true })
+  //   columns!: Columns[] | null;
+
+  @Column({type: 'json'})
+    columns: Columns[] = []
 }

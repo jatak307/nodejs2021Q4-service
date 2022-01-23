@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
+import { Task } from "./task.model";
 
 /**
  * This class sets the state for the user object
@@ -16,4 +17,7 @@ export class User extends BaseEntity {
 
   @Column()
     password!: string;
+
+  @OneToMany(() => Task, (task) => task.user)
+    tasks!: string;
 }

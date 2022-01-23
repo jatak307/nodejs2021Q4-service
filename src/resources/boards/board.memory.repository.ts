@@ -1,5 +1,4 @@
 import { Board } from '../../entity/board.model';
-import { Task } from '../../entity/task.model';
 import { CreateBoard } from './board.models';
 
 /**
@@ -26,7 +25,7 @@ async function getOneBoard(id: string): Promise<Board | undefined> {
  * @param obj object of type CreateBoard
  * @returns Object of type {@link Board} 
  */
-async function createNewBoard(obj: CreateBoard): Promise<Board> {
+async function createNewBoard(obj: Board): Promise<Board> {
   const board = Board.create(obj);
   await Board.save(board);
   return board;
@@ -38,10 +37,13 @@ async function createNewBoard(obj: CreateBoard): Promise<Board> {
  * @param body object of type {@link CreateBoard | CreateBoard interface}
  * @returns Object of type {@link Board} with changed properties
  */
-async function updateBoardById(id: string, body: CreateBoard): Promise<Board | undefined > {  
-  await Board.update(id, {...body});
-  const updatedBoard: Board | undefined = await Board.findOne(id);
-  return updatedBoard;
+async function updateBoardById(id: string, body: CreateBoard): Promise<Partial<Board> | undefined > {  
+  let updatedBoard: Partial<Board> | undefined = await getOneBoard(id);
+  updatedBoard = {
+    id, ...body
+  }
+  await Board.getRepository().save(updatedBoard)
+  return updatedBoard
 }
 
 /**
@@ -49,11 +51,8 @@ async function updateBoardById(id: string, body: CreateBoard): Promise<Board | u
  * @param id board ID
  */
 async function deleteBoardById(id: string): Promise<void> {
-  const tasks = await Task.find({where: {boardId: id}});
-  tasks.forEach(async(t) => {
-    await Task.delete(t.id)
-  });
-  await Board.delete(id);
+  const board = await Board.findOne(id)
+  await board?.remove()
 }
 
 export { getBoards, getOneBoard, createNewBoard, updateBoardById, deleteBoardById };

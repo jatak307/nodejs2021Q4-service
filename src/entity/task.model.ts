@@ -19,14 +19,22 @@ export class Task extends BaseEntity {
   @Column()
     description!: string;
 
-  @ManyToOne(() => Board, board => board.id, { cascade: true, onDelete: "CASCADE" })
+  @ManyToOne(() => Board, (board) => board.tasks, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'boardId' })
+    board!: string;
+
+  @Column({ nullable: true })
     boardId!: string;
 
   @Column({ nullable: true })
     columnId!: string;
 
-  @ManyToOne(() => User, user => user.id, { cascade: true, onDelete: "CASCADE" })
-    userId!: string | null
+  @ManyToOne(() => User, (user) => user.tasks, { onDelete: 'SET NULL'})
+  @JoinColumn({ name: 'userId' })
+    user!: string;
+
+  @Column({ nullable: true })
+    userId!: string | null;
 
   /**
  * This method overwrites the userId for the class instance

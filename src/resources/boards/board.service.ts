@@ -8,9 +8,7 @@ import {
 } from './board.memory.repository';
 
 import { CreateBoard, UpdateBoard } from './board.models';
-import { getAllTasks, deleteTask } from '../tasks/task.service';
 import { Board } from '../../entity/board.model';
-import { Task } from '../../entity/task.model';
 import { CustomError } from '../../common/error';
 
 
@@ -44,7 +42,7 @@ async function getBoardById(id: string): Promise<Board | undefined> {
  * @param body data for create board
  * @returns New Board Promise
  */
-async function createBoard(data: CreateBoard): Promise<Board> {
+async function createBoard(data: Board): Promise<Board> {
   const createdBoard: Board = await createNewBoard(data);
   return createdBoard;
 }
@@ -55,7 +53,7 @@ async function createBoard(data: CreateBoard): Promise<Board> {
  * @param body new data for this board
  * @returns Updated Board Promise
  */
-async function updateBoard(id: string, body: UpdateBoard): Promise<Board | undefined> {
+async function updateBoard(id: string, body: UpdateBoard): Promise<Partial<Board> | undefined> {
   const oldBoard: Board | undefined = await getBoardById(id);  
   if (oldBoard === undefined) {
     throw new CustomError(
@@ -67,7 +65,7 @@ async function updateBoard(id: string, body: UpdateBoard): Promise<Board | undef
     title: body.title || oldBoard.title,
     columns: body.columns || oldBoard.columns
   };
-  const updatedBoard: Board | undefined = await updateBoardById(id, boardData);
+  const updatedBoard: Partial<Board> | undefined = await updateBoardById(id, boardData);
   return updatedBoard;
 }
 
