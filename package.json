@@ -70,6 +70,8 @@
   },
   "devDependencies": {
     "@microsoft/tsdoc": "^0.13.2",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/koa": "^2.13.4",
     "@types/koa__router": "^8.0.11",
     "@types/koa-bodyparser": "^4.3.4",
