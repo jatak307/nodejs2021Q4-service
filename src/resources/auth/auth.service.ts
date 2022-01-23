@@ -4,7 +4,7 @@ import { config } from '../../common/config';
 import { User } from "../../entity/user.model";
 
 const basicAuth = async (ctx: Context) => {
-  const JWT_SECRET_KEY = { config };
+  const { JWT_SECRET_KEY } = config;
   try {
     const { password } = ctx.request.body
     if (!ctx.request.body.login && !password) {
@@ -20,7 +20,7 @@ const basicAuth = async (ctx: Context) => {
           id,
           login
         },
-        JWT_SECRET_KEY as unknown as string
+        JWT_SECRET_KEY as string
       );
       ctx.status = 201;
       ctx.body = {

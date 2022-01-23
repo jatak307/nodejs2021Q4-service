@@ -5,7 +5,7 @@ import { config } from './config';
 
 // eslint-disable-next-line consistent-return
 const verifyToken = (ctx: Context, next: Next) => {
-  const JWT_SECRET_KEY = { config };
+  const { JWT_SECRET_KEY } = config;
   let token!: string;
 
   if (ctx.headers.authorization && ctx.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -18,20 +18,20 @@ const verifyToken = (ctx: Context, next: Next) => {
   }
 
   try {
-    jwt.verify(token, JWT_SECRET_KEY as unknown as string);
+    jwt.verify(token, JWT_SECRET_KEY as string);
     return next();
-  } catch(err) {
+  } catch (err) {
     ctx.body = 'Invalid Token';
     ctx.status = 401;
   }
 }
 
 const generateHash = async (password: string) => {
-  const hash = await bcrypt.hash(password ,10);
+  const hash = await bcrypt.hash(password, 10);
   return hash;
 }
 
-export { 
+export {
   verifyToken,
-  generateHash 
+  generateHash
 };

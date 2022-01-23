@@ -1,5 +1,6 @@
 import Router from '@koa/router';
 import { Context, DefaultContext, DefaultState } from 'koa';
+import { verifyToken } from '../../common/auth';
 import { logger } from '../../logging/log';
 
 import { TaskRoutes } from '../tasks/task.router';
@@ -11,14 +12,14 @@ const BoardsRoutes: Router<DefaultState, DefaultContext> = new Router({
 });
 
 BoardsRoutes
-  .get('/', async (ctx: Context) => {
+  .get('/', verifyToken, async (ctx: Context) => {
     ctx.body= await getAllBoards();
     logger.http(`GET. Url: ${ctx.url}. 
       Response status - ${ctx.status}. 
       Params: ${JSON.stringify(ctx.params)}.
       Body: ${JSON.stringify(ctx.body)}`);
   })
-  .get('/:id', async (ctx: Context) => {
+  .get('/:id', verifyToken, async (ctx: Context) => {
     const boardId = ctx.params.id;
     const result = await getBoardById(boardId);
     ctx.body = result;
@@ -28,7 +29,7 @@ BoardsRoutes
       Body: ${JSON.stringify(ctx.body)}`
     );
   })
-  .post('/', async (ctx: Context) => {
+  .post('/', verifyToken, async (ctx: Context) => {
     const inputData =  ctx.request.body;
     const board = await createBoard(inputData);
     ctx.status = 201;
@@ -39,7 +40,7 @@ BoardsRoutes
       Params: ${JSON.stringify(ctx.params)}.
       Body: ${JSON.stringify(ctx.body)}`);
   })
-  .put('/:id', async (ctx: Context) => {
+  .put('/:id', verifyToken, async (ctx: Context) => {
     const boardId = ctx.params.id;
     const inputData =  ctx.request.body;
     const updatedBoard = await updateBoard(boardId, inputData);
@@ -50,7 +51,7 @@ BoardsRoutes
       Params: ${JSON.stringify(ctx.params)}. 
       Body: ${JSON.stringify(ctx.body)}`);
   })
-  .delete('/:id', async (ctx: Context) => {
+  .delete('/:id', verifyToken, async (ctx: Context) => {
     const boardId = ctx.params.id;
     await deleteBoard(boardId);
     ctx.status = 204;

@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import {MigrationInterface, QueryRunner} from "typeorm";
 
 export class firstMigration1642951518922 implements MigrationInterface {

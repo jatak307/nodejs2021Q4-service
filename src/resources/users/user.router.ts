@@ -1,5 +1,6 @@
 import Router from '@koa/router';
 import { Context, DefaultContext, DefaultState } from 'koa';
+import { verifyToken } from '../../common/auth';
 import { logger } from '../../logging/log';
 
 import { getAll, getById, create, update, deleteUser } from './user.service';
@@ -9,7 +10,7 @@ const UserRoutes: Router<DefaultState, DefaultContext> = new Router({
 });
 
 UserRoutes
-  .get('/', async (ctx: Context) => {    
+  .get('/', verifyToken, async (ctx: Context) => {    
     // throw new Error("error from users get");
     ctx.body = await getAll();
     logger.http(`GET. Url: ${ctx.url}. 
@@ -17,7 +18,7 @@ UserRoutes
       Params: ${JSON.stringify(ctx.params)}.
       Body: ${JSON.stringify(ctx.body)}`);
   })
-  .get('/:id', async (ctx: Context) => {
+  .get('/:id', verifyToken, async (ctx: Context) => {
     const userId = ctx.params.id;
     const result = await getById(userId);
     ctx.body = result;
@@ -27,7 +28,7 @@ UserRoutes
       Body: ${JSON.stringify(ctx.body)}`
     );
   })
-  .post('/', async (ctx: Context) => {
+  .post('/', verifyToken, async (ctx: Context) => {
     const inputData = ctx.request.body;
     const user = await create(inputData);
     ctx.status = 201;
@@ -38,7 +39,7 @@ UserRoutes
       Params: ${JSON.stringify(ctx.params)}.
       Body: ${JSON.stringify(ctx.body)}`);
   })
-  .put('/:id', async (ctx: Context) => {
+  .put('/:id', verifyToken, async (ctx: Context) => {
     const userId = ctx.params.id;
     const inputData = ctx.request.body;
     const updatedUser = await update(userId, inputData);
@@ -49,7 +50,7 @@ UserRoutes
       Params: ${JSON.stringify(ctx.params)}. 
       Body: ${JSON.stringify(ctx.body)}`);
   })
-  .delete('/:id', async (ctx: Context) => {
+  .delete('/:id', verifyToken, async (ctx: Context) => {
     const userId = ctx.params.id;
     await deleteUser(userId);
     ctx.status = 204;

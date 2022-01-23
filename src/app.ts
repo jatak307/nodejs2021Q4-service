@@ -3,6 +3,7 @@ import bodyParser from "koa-bodyparser";
 
 import { UserRoutes } from './resources/users/user.router';
 import { BoardsRoutes } from './resources/boards/board.router';
+import { routerLogin } from './resources/auth/auth.router';
 import { errorHundler } from './common/error';
 import { logger } from './logging/log';
 
@@ -34,6 +35,9 @@ app.use(UserRoutes.routes())
 
 app.use(BoardsRoutes.routes())
   .use(BoardsRoutes.allowedMethods());
+
+app.use(routerLogin.routes())
+  .use(routerLogin.allowedMethods());
 
 // throw Error('Oops!');
 
