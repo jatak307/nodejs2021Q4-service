@@ -8,7 +8,7 @@
   },
   "parser": "@typescript-eslint/parser",
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint/eslint-plugin"
   ],
   "parserOptions": {
     "project": "./tsconfig.json",
@@ -18,7 +18,7 @@
       "impliedStrict": true
     }
   },
-  "ignorePatterns": ["*.config.js", "node_modules/"],
+  "ignorePatterns": ["*.config.js", "node_modules/", ".eslintrc.js"],
   "settings": {
     "noInlineConfig": true,
     "import/resolver": {
@@ -45,6 +45,9 @@
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/no-explicit-any": 2,
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "max-len": ["warn", { "code": 120 }],
     "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
     "indent": ["warn", 2, {
