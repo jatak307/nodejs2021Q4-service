@@ -50,6 +50,7 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "max-len": ["warn", { "code": 120 }],
     "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
+    "no-useless-constructor": 0,
     "indent": ["warn", 2, {
       "SwitchCase": 1
     }],
