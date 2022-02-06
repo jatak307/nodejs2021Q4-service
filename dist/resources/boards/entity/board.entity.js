@@ -35,7 +35,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Board.prototype, "tasks", void 0);
 Board = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)({ name: 'boards' })
 ], Board);
 exports.Board = Board;
 //# sourceMappingURL=board.entity.js.map

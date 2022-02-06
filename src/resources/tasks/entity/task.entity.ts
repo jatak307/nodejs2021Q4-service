@@ -2,7 +2,7 @@ import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColu
 import { Board } from "../../boards/entity/board.entity";
 import { User } from "../../users/entity/user.entity";
 
-@Entity()
+@Entity({ name: 'tasks' })
 export class Task extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
     id!: string;

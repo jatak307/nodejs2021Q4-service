@@ -2,7 +2,7 @@ import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "t
 import { Task } from "../../tasks/entity/task.entity";
 import { Columns } from "../dto/board.dto";
 
-@Entity()
+@Entity({ name: 'boards' })
 export class Board extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
     id!: string;

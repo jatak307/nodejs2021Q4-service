@@ -19,8 +19,10 @@ const typeorm_2 = require("typeorm");
 const generate_hash_1 = require("../../common/helpers/generate-hash");
 const user_entity_1 = require("./entity/user.entity");
 let UsersService = class UsersService {
-    constructor(userRepo) {
+    constructor(userRepo, connection) {
         this.userRepo = userRepo;
+        this.connection = connection;
+        this.setAdmin();
     }
     async getAllUsers() {
         const allUsers = await this.userRepo.find();
@@ -57,11 +59,22 @@ let UsersService = class UsersService {
     async deleteUser(id) {
         await this.userRepo.delete(id);
     }
+    async setAdmin() {
+        const admin = await this.getUserByLogin('admin');
+        if (!admin) {
+            this.createNewUser({
+                name: "admin",
+                login: "admin",
+                password: "admin",
+            });
+        }
+    }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Connection])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map

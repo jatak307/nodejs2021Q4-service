@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Connection, QueryRunner, Repository } from 'typeorm';
 import { generateHash } from '../../common/helpers/generate-hash';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { User } from './entity/user.entity';
@@ -9,8 +9,12 @@ import { User } from './entity/user.entity';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private userRepo: Repository<User>
-  ) { }
+    private userRepo: Repository<User>,
+    private connection: Connection
+  ) {
+    const queryRunner = this.connection.createQueryRunner();
+    this.setAdmin(queryRunner);
+  }
 
   async getAllUsers(): Promise<User[]> {
     const allUsers = await this.userRepo.find();
@@ -53,5 +57,10 @@ export class UsersService {
 
   async deleteUser(id: string): Promise<void> {
     await this.userRepo.delete(id);
+  }
+
+  private async setAdmin(queryRunner: QueryRunner) {
+    await queryRunner
+      .query(`INSERT INTO "users" (name, login, password) VALUES ('admin', 'admin', '${await generateHash("admin")}')`);
   }
 }
