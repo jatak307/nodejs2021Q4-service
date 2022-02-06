@@ -22,7 +22,8 @@ let UsersService = class UsersService {
     constructor(userRepo, connection) {
         this.userRepo = userRepo;
         this.connection = connection;
-        this.setAdmin();
+        const queryRunner = this.connection.createQueryRunner();
+        this.setAdmin(queryRunner);
     }
     async getAllUsers() {
         const allUsers = await this.userRepo.find();
@@ -59,15 +60,9 @@ let UsersService = class UsersService {
     async deleteUser(id) {
         await this.userRepo.delete(id);
     }
-    async setAdmin() {
-        const admin = await this.getUserByLogin('admin');
-        if (!admin) {
-            this.createNewUser({
-                name: "admin",
-                login: "admin",
-                password: "admin",
-            });
-        }
+    async setAdmin(queryRunner) {
+        await queryRunner
+            .query(`INSERT INTO "users" (name, login, password) VALUES ('admin', 'admin', '${await (0, generate_hash_1.generateHash)("admin")}')`);
     }
 };
 UsersService = __decorate([

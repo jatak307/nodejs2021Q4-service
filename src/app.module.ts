@@ -1,15 +1,10 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import path from 'path';
-import { Connection, QueryRunner } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { generateHash } from './common/helpers/generate-hash';
-import { Board } from './resources/boards/entity/board.entity';
+import { LogMdw } from './common/helpers/logger';
 import { ResourcesModule } from './resources/resources.module';
-import { Task } from './resources/tasks/entity/task.entity';
-import { User } from './resources/users/entity/user.entity';
 
 @Module({
   imports: [
@@ -40,4 +35,8 @@ import { User } from './resources/users/entity/user.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LogMdw).forRoutes('*');
+  }
+}
