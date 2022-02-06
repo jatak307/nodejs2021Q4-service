@@ -21,7 +21,7 @@ AuthModule = __decorate([
         imports: [
             (0, common_1.forwardRef)(() => users_module_1.UsersModule),
             jwt_1.JwtModule.register({
-                secret: 'secret-key',
+                secret: process.env.JWT_SECRET_KEY,
             }),
         ],
         exports: [jwt_1.JwtModule]

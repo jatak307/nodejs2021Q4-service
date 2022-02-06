@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { Board } from './resources/boards/entity/board.entity';
 import { ResourcesModule } from './resources/resources.module';
 import { User } from './resources/users/entity/user.entity';
 
@@ -20,7 +21,7 @@ import { User } from './resources/users/entity/user.entity';
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
       synchronize: true,
-      entities: [User],
+      entities: [User, Board],
       migrationsRun: false,
     }),
     ResourcesModule,

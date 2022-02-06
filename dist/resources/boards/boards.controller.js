@@ -12,35 +12,34 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersController = void 0;
+exports.BoardsController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_guard_1 = require("../../common/guards/auth.guard");
-const user_dto_1 = require("./dto/user.dto");
-const users_service_1 = require("./users.service");
-let UsersController = class UsersController {
-    constructor(usersService) {
-        this.usersService = usersService;
+const boards_service_1 = require("./boards.service");
+const board_dto_1 = require("./dto/board.dto");
+const update_board_dto_1 = require("./dto/update-board.dto");
+let BoardsController = class BoardsController {
+    constructor(boardsService) {
+        this.boardsService = boardsService;
     }
-    async getUsers() {
-        const allUsers = await this.usersService.getAllUsers();
-        return allUsers;
+    async getBoards() {
+        const allBoards = await this.boardsService.getAllBoards();
+        return allBoards;
     }
-    async getUser(id) {
-        const user = await this.usersService.getUserById(id);
-        return user;
+    async getBoard(id) {
+        const board = await this.boardsService.getBoardById(id);
+        return board;
     }
-    async createUser(createDto) {
-        const user = await this.usersService.createNewUser(createDto);
-        const { id, name, login } = user;
-        const responseBody = { id, name, login };
-        return responseBody;
+    async createBoard(createDto) {
+        const board = await this.boardsService.createNewBoard(createDto);
+        return board;
     }
     async update(id, updateDto) {
-        const updatedUser = await this.usersService.updateUser(id, updateDto);
-        return updatedUser;
+        const updatedBoard = await this.boardsService.updateBoard(id, updateDto);
+        return updatedBoard;
     }
     async delete(id) {
-        await this.usersService.deleteUser(id);
+        await this.boardsService.deleteBoard(id);
     }
 };
 __decorate([
@@ -48,29 +47,29 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "getUsers", null);
+], BoardsController.prototype, "getBoards", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "getUser", null);
+], BoardsController.prototype, "getBoard", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [board_dto_1.CreateBoardDto]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "createUser", null);
+], BoardsController.prototype, "createBoard", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, user_dto_1.UpdateUserDto]),
+    __metadata("design:paramtypes", [String, update_board_dto_1.UpdateBoardDto]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "update", null);
+], BoardsController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
@@ -78,11 +77,11 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "delete", null);
-UsersController = __decorate([
-    (0, common_1.Controller)('users'),
+], BoardsController.prototype, "delete", null);
+BoardsController = __decorate([
+    (0, common_1.Controller)('boards'),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
-], UsersController);
-exports.UsersController = UsersController;
-//# sourceMappingURL=users.controller.js.map
+    __metadata("design:paramtypes", [boards_service_1.BoardsService])
+], BoardsController);
+exports.BoardsController = BoardsController;
+//# sourceMappingURL=boards.controller.js.map

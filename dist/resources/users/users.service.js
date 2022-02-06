@@ -16,6 +16,7 @@ exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
+const generate_hash_1 = require("../../common/helpers/generate-hash");
 const user_entity_1 = require("./entity/user.entity");
 let UsersService = class UsersService {
     constructor(userRepo) {
@@ -34,11 +35,18 @@ let UsersService = class UsersService {
         return user;
     }
     async createNewUser(user) {
+        const password = await (0, generate_hash_1.generateHash)(user.password);
+        user.password = password;
         const newUser = this.userRepo.create(Object.assign({}, user));
         await this.userRepo.save(newUser);
         return newUser;
     }
     async updateUser(id, user) {
+        const currentUser = await this.getUserById(id);
+        if (currentUser !== undefined) {
+            const password = await (0, generate_hash_1.generateHash)(currentUser.password);
+            user.password = password;
+        }
         await this.userRepo.update(id, user);
         const updatedUser = await this.getUserById(id);
         return updatedUser;

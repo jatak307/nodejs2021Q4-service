@@ -33,7 +33,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "auth", null);
 AuthController = __decorate([
-    (0, common_1.Controller)('auth'),
+    (0, common_1.Controller)('login'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);
 exports.AuthController = AuthController;

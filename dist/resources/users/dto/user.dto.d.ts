@@ -1,7 +1,7 @@
 interface CreateUserDto {
     readonly name: string;
     readonly login: string;
-    readonly password: string;
+    password: string;
 }
 declare class UpdateUserDto {
     name?: string;

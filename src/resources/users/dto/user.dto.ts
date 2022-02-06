@@ -3,21 +3,21 @@ import { IsOptional, IsString } from "class-validator";
 interface CreateUserDto {
   readonly name: string,
   readonly login: string,
-  readonly password: string
+  password: string
 }
 
 class UpdateUserDto {
   @IsString()
   @IsOptional()
-    name?: string;
-  
-  @IsString()
-  @IsOptional()
-    login?: string;
+  name?: string;
 
   @IsString()
   @IsOptional()
-    password?: string;
+  login?: string;
+
+  @IsString()
+  @IsOptional()
+  password?: string;
 }
 
 export {

@@ -12,6 +12,7 @@ const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const board_entity_1 = require("./resources/boards/entity/board.entity");
 const resources_module_1 = require("./resources/resources.module");
 const user_entity_1 = require("./resources/users/entity/user.entity");
 let AppModule = class AppModule {
@@ -31,7 +32,7 @@ AppModule = __decorate([
                 password: process.env.POSTGRES_PASSWORD,
                 database: process.env.POSTGRES_DB,
                 synchronize: true,
-                entities: [user_entity_1.User],
+                entities: [user_entity_1.User, board_entity_1.Board],
                 migrationsRun: false,
             }),
             resources_module_1.ResourcesModule,
