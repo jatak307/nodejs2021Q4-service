@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { generateHash } from '../../common/helpers/generate-hash';
@@ -17,8 +17,11 @@ export class UsersService {
     return allUsers;
   }
 
-  async getUserById(id: string): Promise<User | undefined> {
+  async getUserById(id: string): Promise<User> {
     const user = await this.userRepo.findOne(id);
+    if (!user) {
+      throw new HttpException(`User with id ${id} not found`, HttpStatus.NOT_FOUND);
+    }
     return user;
   }
 

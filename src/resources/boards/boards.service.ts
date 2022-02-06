@@ -1,13 +1,17 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Task } from '../tasks/entity/task.entity';
 import { CreateBoardDto } from './dto/board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './entity/board.entity';
 
 @Injectable()
 export class BoardsService {
-  constructor(@InjectRepository(Board) private boardRepo: Repository<Board>) {}
+  constructor(
+    @InjectRepository(Board) private boardRepo: Repository<Board>, 
+    @InjectRepository(Task) private tasksRepo: Repository<Task>
+  ) {}
 
   async getAllBoards(): Promise<Board[]> {
     const allBoards = await this.boardRepo.find();
@@ -35,6 +39,7 @@ export class BoardsService {
   }
 
   async deleteBoard(id: string): Promise<void> {
+    await this.tasksRepo.delete({ boardId: id });
     await this.boardRepo.delete(id);
   }
 }

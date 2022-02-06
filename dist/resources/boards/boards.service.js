@@ -16,10 +16,12 @@ exports.BoardsService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
+const task_entity_1 = require("../tasks/entity/task.entity");
 const board_entity_1 = require("./entity/board.entity");
 let BoardsService = class BoardsService {
-    constructor(boardRepo) {
+    constructor(boardRepo, tasksRepo) {
         this.boardRepo = boardRepo;
+        this.tasksRepo = tasksRepo;
     }
     async getAllBoards() {
         const allBoards = await this.boardRepo.find();
@@ -43,13 +45,16 @@ let BoardsService = class BoardsService {
         return updatedBoard;
     }
     async deleteBoard(id) {
+        await this.tasksRepo.delete({ boardId: id });
         await this.boardRepo.delete(id);
     }
 };
 BoardsService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(board_entity_1.Board)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(task_entity_1.Task)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], BoardsService);
 exports.BoardsService = BoardsService;
 //# sourceMappingURL=boards.service.js.map

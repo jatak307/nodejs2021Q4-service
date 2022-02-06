@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Board = void 0;
 const typeorm_1 = require("typeorm");
+const task_entity_1 = require("../../tasks/entity/task.entity");
 let Board = class Board extends typeorm_1.BaseEntity {
     constructor() {
         super(...arguments);
@@ -29,6 +30,10 @@ __decorate([
     (0, typeorm_1.Column)({ type: 'json' }),
     __metadata("design:type", Array)
 ], Board.prototype, "columns", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => task_entity_1.Task, (task) => task.board),
+    __metadata("design:type", Array)
+], Board.prototype, "tasks", void 0);
 Board = __decorate([
     (0, typeorm_1.Entity)()
 ], Board);

@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import path from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Board } from './resources/boards/entity/board.entity';
 import { ResourcesModule } from './resources/resources.module';
+import { Task } from './resources/tasks/entity/task.entity';
 import { User } from './resources/users/entity/user.entity';
 
 @Module({
@@ -21,8 +23,15 @@ import { User } from './resources/users/entity/user.entity';
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
       synchronize: true,
-      entities: [User, Board],
+      logging: false,
+      logger: 'file',
+      entities: [path.join(__dirname, '/**/*.entity{.ts,.js}')],
       migrationsRun: false,
+      dropSchema: true,
+      migrations: [path.join(__dirname, 'migration/**/*.ts')],
+      cli: {
+        "migrationsDir": "src/migration",
+      },
     }),
     ResourcesModule,
   ],

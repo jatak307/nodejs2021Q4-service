@@ -28,6 +28,9 @@ let UsersService = class UsersService {
     }
     async getUserById(id) {
         const user = await this.userRepo.findOne(id);
+        if (!user) {
+            throw new common_1.HttpException(`User with id ${id} not found`, common_1.HttpStatus.NOT_FOUND);
+        }
         return user;
     }
     async getUserByLogin(login) {

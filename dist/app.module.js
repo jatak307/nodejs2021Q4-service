@@ -5,16 +5,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
+const path_1 = __importDefault(require("path"));
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const board_entity_1 = require("./resources/boards/entity/board.entity");
 const resources_module_1 = require("./resources/resources.module");
-const user_entity_1 = require("./resources/users/entity/user.entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -32,8 +34,15 @@ AppModule = __decorate([
                 password: process.env.POSTGRES_PASSWORD,
                 database: process.env.POSTGRES_DB,
                 synchronize: true,
-                entities: [user_entity_1.User, board_entity_1.Board],
+                logging: false,
+                logger: 'file',
+                entities: [path_1.default.join(__dirname, '/**/*.entity{.ts,.js}')],
                 migrationsRun: false,
+                dropSchema: true,
+                migrations: [path_1.default.join(__dirname, 'migration/**/*.ts')],
+                cli: {
+                    "migrationsDir": "src/migration",
+                },
             }),
             resources_module_1.ResourcesModule,
         ],
