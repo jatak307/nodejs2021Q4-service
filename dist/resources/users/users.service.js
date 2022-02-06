@@ -29,6 +29,10 @@ let UsersService = class UsersService {
         const user = await this.userRepo.findOne(id);
         return user;
     }
+    async getUserByLogin(login) {
+        const user = await this.userRepo.findOne({ login });
+        return user;
+    }
     async createNewUser(user) {
         const newUser = this.userRepo.create(Object.assign({}, user));
         await this.userRepo.save(newUser);

@@ -21,6 +21,11 @@ export class UsersService {
     return user;
   }
 
+  async getUserByLogin(login: string): Promise<User | undefined> {
+    const user = await this.userRepo.findOne({login});
+    return user;
+  }
+
   async createNewUser(user: CreateUserDto): Promise<User> {
     const newUser = this.userRepo.create({ ...user });
     await this.userRepo.save(newUser);

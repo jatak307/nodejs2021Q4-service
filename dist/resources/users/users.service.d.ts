@@ -6,6 +6,7 @@ export declare class UsersService {
     constructor(userRepo: Repository<User>);
     getAllUsers(): Promise<User[]>;
     getUserById(id: string): Promise<User | undefined>;
+    getUserByLogin(login: string): Promise<User | undefined>;
     createNewUser(user: CreateUserDto): Promise<User>;
     updateUser(id: string, user: UpdateUserDto): Promise<User | undefined>;
     deleteUser(id: string): Promise<void>;
