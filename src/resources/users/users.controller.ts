@@ -38,6 +38,7 @@ export class UsersController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@Param('id') id: string): Promise<void> {
+    console.log('khuukh');
     await this.usersService.deleteUser(id);
   }
 }
